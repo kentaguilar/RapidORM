@@ -39,13 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ColumnName.cs" />
+    <Compile Include="Attributes\IsImage.cs" />
+    <Compile Include="Attributes\IsPrimaryKey.cs" />
+    <Compile Include="Attributes\TableName.cs" />
+    <Compile Include="Common\ImageParameter.cs" />
+    <Compile Include="Common\ImageParameterQueryContainer.cs" />
+    <Compile Include="Common\SearchCriteria.cs" />
+    <Compile Include="Data\DBConnection.cs" />
     <Compile Include="Data\DBContext.cs" />
+    <Compile Include="Data\Field.cs" />
+    <Compile Include="Helpers\PropertyHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-    <Folder Include="Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
