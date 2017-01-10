@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ZioLib\ZioApp\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +47,8 @@
     <Compile Include="Attributes\IsImage.cs" />
     <Compile Include="Attributes\IsPrimaryKey.cs" />
     <Compile Include="Attributes\TableName.cs" />
+    <Compile Include="Client\MySQL\MySqlQueryBuilder.cs" />
+    <Compile Include="Client\SQL\SqlQueryBuilder.cs" />
     <Compile Include="Common\ImageParameter.cs" />
     <Compile Include="Common\ImageParameterQueryContainer.cs" />
     <Compile Include="Common\SearchCriteria.cs" />
@@ -55,11 +61,7 @@
     <Compile Include="Interfaces\IQueryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Client\MySQL\" />
-    <Folder Include="Client\QueryBuilder\" />
-    <Folder Include="Client\SQL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
