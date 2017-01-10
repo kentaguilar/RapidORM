@@ -49,10 +49,17 @@
     <Compile Include="Data\DBConnection.cs" />
     <Compile Include="Data\DBContext.cs" />
     <Compile Include="Data\Field.cs" />
+    <Compile Include="Data\Query.cs" />
     <Compile Include="Helpers\PropertyHelper.cs" />
+    <Compile Include="Interfaces\IDBEntity.cs" />
+    <Compile Include="Interfaces\IQueryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Client\MySQL\" />
+    <Folder Include="Client\QueryBuilder\" />
+    <Folder Include="Client\SQL\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
