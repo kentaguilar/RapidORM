@@ -47,7 +47,9 @@
     <Compile Include="Attributes\IsImage.cs" />
     <Compile Include="Attributes\IsPrimaryKey.cs" />
     <Compile Include="Attributes\TableName.cs" />
+    <Compile Include="Client\MySQL\MySqlEntity.cs" />
     <Compile Include="Client\MySQL\MySqlQueryBuilder.cs" />
+    <Compile Include="Client\MySQL\MySqlTransaction.cs" />
     <Compile Include="Client\SQL\SqlEntity.cs" />
     <Compile Include="Client\SQL\SqlQueryBuilder.cs" />
     <Compile Include="Client\SQL\SqlTransaction.cs" />
