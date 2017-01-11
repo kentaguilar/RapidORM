@@ -48,7 +48,9 @@
     <Compile Include="Attributes\IsPrimaryKey.cs" />
     <Compile Include="Attributes\TableName.cs" />
     <Compile Include="Client\MySQL\MySqlQueryBuilder.cs" />
+    <Compile Include="Client\SQL\SqlEntity.cs" />
     <Compile Include="Client\SQL\SqlQueryBuilder.cs" />
+    <Compile Include="Client\SQL\SqlTransaction.cs" />
     <Compile Include="Common\ImageParameter.cs" />
     <Compile Include="Common\ImageParameterQueryContainer.cs" />
     <Compile Include="Common\SearchCriteria.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Data\DBContext.cs" />
     <Compile Include="Data\Field.cs" />
     <Compile Include="Data\Query.cs" />
+    <Compile Include="Enums\ReturnsId.cs" />
     <Compile Include="Helpers\PropertyHelper.cs" />
     <Compile Include="Interfaces\IDBEntity.cs" />
     <Compile Include="Interfaces\IQueryBuilder.cs" />
