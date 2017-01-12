@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>553a0310-57b9-4afd-9634-04852d82ac5c</ProjectGuid>
+    <ProjectGuid>{8E6BA94E-823C-4FFC-B609-E88181BB7F6D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RapidORM.Tests</RootNamespace>
@@ -50,7 +50,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Models\MySQL\Department.cs" />
+    <Compile Include="Models\MySQL\Person.cs" />
+    <Compile Include="Models\SQL\Car.cs" />
+    <Compile Include="Models\SQL\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Choose>
