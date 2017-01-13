@@ -1,5 +1,7 @@
 E:\Kent Files\RapidORM\RapidORM.Tests\bin\Debug\RapidORM.Tests.dll
 E:\Kent Files\RapidORM\RapidORM.Tests\bin\Debug\RapidORM.Tests.pdb
+E:\Kent Files\RapidORM\RapidORM.Tests\bin\Debug\RapidORM.dll
+E:\Kent Files\RapidORM\RapidORM.Tests\bin\Debug\RapidORM.pdb
 E:\Kent Files\RapidORM\RapidORM.Tests\obj\Debug\RapidORM.Tests.csprojResolveAssemblyReference.cache
 E:\Kent Files\RapidORM\RapidORM.Tests\obj\Debug\RapidORM.Tests.dll
 E:\Kent Files\RapidORM\RapidORM.Tests\obj\Debug\RapidORM.Tests.pdb

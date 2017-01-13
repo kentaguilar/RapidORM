@@ -35,7 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ZioLib\ZioApp\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,11 +55,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Core\Database.cs" />
+    <Compile Include="CustomQueries\MySqlQueryBuilderTest.cs" />
+    <Compile Include="CustomQueries\SqlQueryBuilderTest.cs" />
     <Compile Include="Models\MySQL\Department.cs" />
-    <Compile Include="Models\MySQL\Person.cs" />
-    <Compile Include="Models\SQL\Car.cs" />
     <Compile Include="Models\SQL\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RapidORM\RapidORM.csproj">
+      <Project>{907a022a-adae-48fd-8cf5-367cd7403ff6}</Project>
+      <Name>RapidORM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

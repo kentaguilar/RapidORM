@@ -3,10 +3,63 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RapidORM.Data;
+using RapidORM.Helpers;
+using RapidORM.Attributes;
+using RapidORM.Interfaces;
+using RapidORM.Client.MySQL;
+using RapidORM.Common;
 
 namespace RapidORM.Tests.Models.MySQL
 {
-    class Department
+    [TableName("department")]
+    public class Department
     {
+        [IsPrimaryKey(true)]
+        [ColumnName("id")]
+        public int Id { get; set; }
+
+        [ColumnName("name")]
+        public string Name { get; set; }
+
+        [ColumnName("date_created")]
+        public string DateCreated { get; set; }
+        
+        private IDBEntity<Department> dbEntity = null;
+
+        public Department()
+        {
+            dbEntity = new MySqlEntity<Department>();
+        }
+        
+        public Department(Dictionary<string, object> args)
+        {
+            Id = Convert.ToInt32(args["id"].ToString());
+            Name = args["name"].ToString();
+            DateCreated = args["date_created"].ToString();
+        }
+
+        #region Class Methods
+        public void Save()
+        {
+            dbEntity.SaveChanges(new Department
+            {
+                Name = "Inventory"
+            });
+
+            Console.WriteLine("Data Saved");
+        }
+
+        public void GetDepartmentByDate()
+        {
+            var departmentList = dbEntity.GetObjectsByCriteria(new SearchCriteria
+            {
+                Column = PropertyHelper.GetPropertyName(() => this.DateCreated),
+                Value = DateTime.Now.ToString("yyyy-MM-dd")
+            });
+
+            Console.WriteLine(departmentList.Count);
+        }
+        #endregion
     }
 }
