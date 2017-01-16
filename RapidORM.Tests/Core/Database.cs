@@ -29,6 +29,6 @@ namespace RapidORM.Tests.Core
                 Username = "",
                 Password = ""
             };
-        }
+        }        
     }
 }

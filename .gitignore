@@ -1,4 +1,4 @@
-RapidORM/bin/
-RapidORM/obj/
-RapidORM.Tests/bin/
-RapidORM.Tests/obj/
+/RapidORM/bin/
+/RapidORM/obj/
+/RapidORM.Tests/bin/
+/RapidORM.Tests/obj/

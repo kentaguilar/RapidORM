@@ -40,14 +40,9 @@ namespace RapidORM.Tests.Models.MySQL
         }
 
         #region Class Methods
-        public void Save()
+        public void Save(Department department)
         {
-            dbEntity.SaveChanges(new Department
-            {
-                Name = "Inventory"
-            });
-
-            Console.WriteLine("Data Saved");
+            dbEntity.SaveChanges(department);
         }
 
         public void GetDepartmentByDate()
