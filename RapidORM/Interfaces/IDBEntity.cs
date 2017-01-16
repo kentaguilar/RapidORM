@@ -10,20 +10,35 @@ namespace RapidORM.Interfaces
     public interface IDBEntity<T>
     {
         /// <summary>
-        /// All-in-one saving of changes
+        /// All-in-one saving of changes. 
+        /// It automatically detects if object provided will be used for insert or update
         /// </summary>
         /// <param name="o"></param>
         void SaveChanges(T o);
 
         /// <summary>
         /// All-in-one saving of changes with blob images
+        /// It automatically detects if object provided will be used for insert or update
         /// </summary>
         /// <param name="o"></param>
         void SaveChangesWithImage(T o);
 
+        /// <summary>
+        /// Updates an object. Also used by Save Changes method
+        /// </summary>
+        /// <param name="o"></param>
         void UpdateObject(T o);
+
+        /// <summary>
+        /// Updates an object with an image. Also used by Save Changes method
+        /// </summary>
+        /// <param name="o"></param>
         void UpdateObjectWithImage(T o);
 
+        /// <summary>
+        /// Inserts an object to database and returns the record id
+        /// </summary>
+        /// <param name="o"></param>
         int InsertObjectAndReturnsId(T o);
         void InsertObject(T o);
         void InsertObjectWithImage(T o);
