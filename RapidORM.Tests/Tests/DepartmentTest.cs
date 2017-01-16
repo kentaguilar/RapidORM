@@ -41,5 +41,13 @@ namespace RapidORM.Tests.Tests
 
             Assert.AreEqual(5, departments.Count());
         }
+
+        [TestMethod]
+        public void GetDepartmentByDateTest()
+        {
+            IEnumerable<Department> departments = department.GetDepartmentByDate(DateTime.Now);
+
+            Assert.AreEqual(5, departments.Count());
+        }
     }
 }

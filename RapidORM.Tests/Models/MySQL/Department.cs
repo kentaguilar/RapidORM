@@ -52,12 +52,12 @@ namespace RapidORM.Tests.Models.MySQL
             return departments;
         }
 
-        public IEnumerable<Department> GetDepartmentByDate()
+        public IEnumerable<Department> GetDepartmentByDate(DateTime givenDate)
         {
             var departments = dbEntity.GetObjectsByCriteria(new SearchCriteria
             {
                 Column = PropertyHelper.GetPropertyName(() => this.DateCreated),
-                Value = DateTime.Now.ToString("yyyy-MM-dd")
+                Value = givenDate.ToString("yyyy-MM-dd")
             });
 
             return departments;
