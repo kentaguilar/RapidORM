@@ -88,9 +88,9 @@ namespace RapidORM.Client.SQL
         #endregion
 
         #region Retrieval        
-        public List<T> GetAllObjects()
+        public IEnumerable<T> GetAllObjects()
         {
-            List<T> objects = null;
+            IEnumerable<T> objects = null;
             string table = tableName;
 
             string strSQL = "select * from " + table;

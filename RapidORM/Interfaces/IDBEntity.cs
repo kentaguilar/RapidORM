@@ -32,7 +32,7 @@ namespace RapidORM.Interfaces
         void DeleteObject(T o);
         void DeleteObject(T o, string field);
 
-        List<T> GetAllObjects();
+        IEnumerable<T> GetAllObjects();
         List<T> GetObjectsByCriteria(string field, string criteria);
         List<T> GetObjectsByCriteria(List<SearchCriteria> searchCriteriaList);
         List<T> GetObjectsByCriteria(SearchCriteria searchCriteria);

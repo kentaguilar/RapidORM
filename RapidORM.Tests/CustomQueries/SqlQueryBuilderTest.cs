@@ -18,7 +18,7 @@ namespace RapidORM.Tests.CustomQueries
 
         public SqlQueryBuilderTest()
         {
-            Database.MySqlDb();
+            Database.UseMySqlDb();
             queryBuilder = new SqlQueryBuilder();
         }
 

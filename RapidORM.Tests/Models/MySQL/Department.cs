@@ -45,15 +45,22 @@ namespace RapidORM.Tests.Models.MySQL
             dbEntity.SaveChanges(department);
         }
 
-        public void GetDepartmentByDate()
+        public IEnumerable<Department> GetAllDepartments()
         {
-            var departmentList = dbEntity.GetObjectsByCriteria(new SearchCriteria
+            IEnumerable<Department> departments = dbEntity.GetAllObjects();
+
+            return departments;
+        }
+
+        public IEnumerable<Department> GetDepartmentByDate()
+        {
+            var departments = dbEntity.GetObjectsByCriteria(new SearchCriteria
             {
                 Column = PropertyHelper.GetPropertyName(() => this.DateCreated),
                 Value = DateTime.Now.ToString("yyyy-MM-dd")
             });
 
-            Console.WriteLine(departmentList.Count);
+            return departments;
         }
         #endregion
     }

@@ -9,7 +9,7 @@ namespace RapidORM.Tests.Core
 {
     public class Database
     {
-        public static void SqlDb()
+        public static void UseSqlDb()
         {
             DBContext.ConnectionString = new DBConnection()
             {
@@ -20,7 +20,7 @@ namespace RapidORM.Tests.Core
             };
         }
 
-        public static void MySqlDb()
+        public static void UseMySqlDb()
         {
             DBContext.ConnectionString = new DBConnection()
             {
@@ -29,6 +29,6 @@ namespace RapidORM.Tests.Core
                 Username = "",
                 Password = ""
             };
-        }        
+        }
     }
 }
