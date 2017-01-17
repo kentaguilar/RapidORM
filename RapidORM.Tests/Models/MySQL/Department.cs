@@ -45,27 +45,24 @@ namespace RapidORM.Tests.Models.MySQL
             dbEntity.SaveChanges(department);
         }
 
-        public int InsertDepartmentAndReturnsAnId(Department department)
+        public int InsertDepartmentAndReturnAnId(Department department)
         {
             int returnedId = dbEntity.InsertObjectAndReturnsId(department);
 
             return returnedId;
         }
 
-        public void DeleteDepartmentByFieldName()
+        public void DeleteDepartmentByPropertyName(string fieldValue)
         {
             dbEntity.DeleteObject(new Department 
             { 
-                Name = "Inventory"
-            }, "name");
+                Name = fieldValue
+            }, "Name");
         }
 
-        public void DeleteDepartmentByObject()
+        public void DeleteDepartmentByObject(Department department)
         {
-            dbEntity.DeleteObject(new Department 
-            { 
-                Id = 3
-            });
+            dbEntity.DeleteObject(department);
         }
 
         public IEnumerable<Department> GetAllDepartments()
@@ -75,7 +72,7 @@ namespace RapidORM.Tests.Models.MySQL
             return (departments.Count() > 0) ? departments : null;
         }
 
-        public IEnumerable<Department> GetDepartmentByDate(DateTime givenDate)
+        public IEnumerable<Department> GetDepartmentsByDate(DateTime givenDate)
         {
             var departments = dbEntity.GetObjectsByCriteria(new SearchCriteria
             {
@@ -86,9 +83,9 @@ namespace RapidORM.Tests.Models.MySQL
             return (departments.Count() > 0) ? departments : null;
         }
 
-        public IEnumerable<Department> GetDepartmentsByStringCriteria()
+        public IEnumerable<Department> GetDepartmentsByStringCriteria(int id)
         {
-            var departments = dbEntity.GetObjectsByCriteria("id", "47");
+            var departments = dbEntity.GetObjectsByCriteria("Id", id.ToString());
 
             return (departments.Count() > 0) ? departments : null;
         }

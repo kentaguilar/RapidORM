@@ -27,11 +27,42 @@ namespace RapidORM.Tests.Tests
         {            
             department.Save(new Department 
             { 
-                Name = "Inventory",
+                Name = "Human Resource",
                 DateCreated = DateHelper.GetDateTimeForDB()
             });
 
             Assert.Inconclusive("New Department Saved");
+        }        
+
+        [TestMethod]
+        public void InsertDepartmentAndReturnAnIdTest()
+        {
+            int savedId = department.InsertDepartmentAndReturnAnId(new Department 
+            { 
+                Name = "Production",
+                DateCreated = DateHelper.GetDateTimeForDB()
+            });
+
+            Assert.AreEqual(1, savedId);
+        }
+
+        [TestMethod]
+        public void DeleteDepartmentByFieldNameTest()
+        {
+            department.DeleteDepartmentByPropertyName("Inventory");
+
+            Assert.Inconclusive("Department deleted");
+        }
+
+        [TestMethod]
+        public void DeleteDepartmentByObjectTest()
+        {
+            department.DeleteDepartmentByObject(new Department
+            {
+                Id = 3
+            });
+
+            Assert.Inconclusive("Department deleted");
         }
 
         [TestMethod]
@@ -45,7 +76,23 @@ namespace RapidORM.Tests.Tests
         [TestMethod]
         public void GetDepartmentByDateTest()
         {
-            IEnumerable<Department> departments = department.GetDepartmentByDate(DateTime.Now);
+            IEnumerable<Department> departments = department.GetDepartmentsByDate(DateTime.Now);
+
+            Assert.AreEqual(5, departments.Count());
+        }
+
+        [TestMethod]
+        public void GetDepartmentsByStringCriteriaTest()
+        {
+            IEnumerable<Department> departments = department.GetDepartmentsByStringCriteria(4);
+
+            Assert.AreEqual(5, departments.Count());
+        }
+
+        [TestMethod]
+        public void GetDepartmentsByMultipleCriteriaTest()
+        {
+            IEnumerable<Department> departments = department.GetDepartmentsByMultipleCriteria("Marketing", DateTime.Now);
 
             Assert.AreEqual(5, departments.Count());
         }
