@@ -121,6 +121,19 @@ namespace RapidORM.Client.MySQL
         }
         #endregion
 
+        #region Delete
+        public void DeleteObject(T o)
+        {
+            PropertyInfo primaryKey = GetPrimaryKey();
+            DeleteObject(o, primaryKey);
+        }
+
+        public void DeleteObject(T o, string field)
+        {
+            DeleteObject(o, GetField(field));
+        }
+        #endregion
+
         #region Retrieval
         public IEnumerable<T> GetAllObjects()
         {
@@ -134,28 +147,28 @@ namespace RapidORM.Client.MySQL
             return objects;
         }
 
-        public List<T> GetObjectsByCriteria(string field, string criteria)
+        public IEnumerable<T> GetObjectsByCriteria(string field, string criteria)
         {
             return GetObjectsByCriteria(GetField(field), criteria);
         }
 
-        public List<T> GetObjectsByCriteria(List<SearchCriteria> searchCriteriaList)
+        public IEnumerable<T> GetObjectsByCriteria(List<SearchCriteria> searchCriteriaList)
         {
             return GetObjectsByMultipleCriterias(searchCriteriaList);
         }
 
-        public List<T> GetObjectsByCriteria(SearchCriteria searchCriteria)
+        public IEnumerable<T> GetObjectsByCriteria(SearchCriteria searchCriteria)
         {
             return GetObjectsByCriteria(GetField(searchCriteria.Column), searchCriteria.Value);
         }
 
-        public List<T> GetObjectsByCriteria(string criteria)
+        public IEnumerable<T> GetObjectsByCriteria(string criteria)
         {
             PropertyInfo primaryKey = GetPrimaryKey();
             return GetObjectsByCriteria(primaryKey, criteria);
         }
 
-        public List<T> GetObjectsByMultipleCriterias(List<SearchCriteria> searchCriteriaList)
+        public IEnumerable<T> GetObjectsByMultipleCriterias(List<SearchCriteria> searchCriteriaList)
         {
             string table = tableName;
 
@@ -171,19 +184,6 @@ namespace RapidORM.Client.MySQL
 
             return GetValues(strSQL);
         }
-        #endregion
-
-        #region Delete
-        public void DeleteObject(T o)
-        {
-            PropertyInfo primaryKey = GetPrimaryKey();
-            DeleteObject(o, primaryKey);
-        }
-
-        public void DeleteObject(T o, string field)
-        {
-            DeleteObject(o, GetField(field));
-        }
-        #endregion
+        #endregion        
     }
 }

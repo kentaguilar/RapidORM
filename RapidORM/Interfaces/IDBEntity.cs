@@ -40,18 +40,72 @@ namespace RapidORM.Interfaces
         /// </summary>
         /// <param name="o"></param>
         int InsertObjectAndReturnsId(T o);
+
+        /// <summary>
+        /// Straightforward object insertion
+        /// </summary>
+        /// <param name="o"></param>
         void InsertObject(T o);
+
+        /// <summary>
+        /// Save an object with image(byte array)
+        /// </summary>
+        /// <param name="o"></param>
         void InsertObjectWithImage(T o);
+
+        /// <summary>
+        /// Save an object without primary key
+        /// </summary>
+        /// <param name="o"></param>
         void InsertObjectWithoutPrimaryKey(T o);
 
+        /// <summary>
+        /// Delete a record with an object
+        /// </summary>
+        /// <param name="o"></param>
         void DeleteObject(T o);
+
+        /// <summary>
+        /// Delete a record using a class property name
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="field"></param>
         void DeleteObject(T o, string field);
 
+        /// <summary>
+        /// Get all table records
+        /// </summary>        
         IEnumerable<T> GetAllObjects();
-        List<T> GetObjectsByCriteria(string field, string criteria);
-        List<T> GetObjectsByCriteria(List<SearchCriteria> searchCriteriaList);
-        List<T> GetObjectsByCriteria(SearchCriteria searchCriteria);
-        List<T> GetObjectsByCriteria(string criteria);
-        List<T> GetObjectsByMultipleCriterias(List<SearchCriteria> searchCriteriaList);
+
+        /// <summary>
+        /// Retrieve record(s) using a class property name
+        /// </summary>
+        /// <param name="field"></param>
+        /// <param name="criteria"></param>
+        IEnumerable<T> GetObjectsByCriteria(string field, string criteria);
+
+        /// <summary>
+        /// Retrieve record(s) using multiple conditions. Alternative to GetObjectsByMultipleCriterias
+        /// </summary>
+        /// <param name="searchCriteriaList"></param>
+        IEnumerable<T> GetObjectsByCriteria(List<SearchCriteria> searchCriteriaList);
+
+        /// <summary>
+        /// Retrieve record(s) with a single condition only
+        /// </summary>
+        /// <param name="searchCriteria"></param>
+        IEnumerable<T> GetObjectsByCriteria(SearchCriteria searchCriteria);
+
+        /// <summary>
+        /// Retrieve a condition using a class property name(string)
+        /// </summary>
+        /// <param name="criteria"></param>
+        IEnumerable<T> GetObjectsByCriteria(string criteria);
+
+        /// <summary>
+        /// Retrieve record(s) using multiple conditions
+        /// </summary>
+        /// <param name="searchCriteriaList"></param>
+        IEnumerable<T> GetObjectsByMultipleCriterias(List<SearchCriteria> searchCriteriaList);
     }
 }

@@ -35,20 +35,6 @@ namespace RapidORM.Client.SQL
             }
         }
 
-        #region Update
-        public void UpdateObject(T o)
-        {
-            try
-            {
-                ExecuteNonQuery(CreateUpdateQuery(o));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-        }
-        #endregion
-
         #region Create
         public int InsertObjectAndReturnsId(T o)
         {
@@ -87,6 +73,33 @@ namespace RapidORM.Client.SQL
         }
         #endregion
 
+        #region Update
+        public void UpdateObject(T o)
+        {
+            try
+            {
+                ExecuteNonQuery(CreateUpdateQuery(o));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+        #endregion        
+
+        #region Delete
+        public void DeleteObject(T o)
+        {
+            PropertyInfo primaryKey = GetPrimaryKey();
+            DeleteObject(o, primaryKey);
+        }
+
+        public void DeleteObject(T o, string field)
+        {
+            DeleteObject(o, GetField(field));
+        }
+        #endregion
+
         #region Retrieval        
         public IEnumerable<T> GetAllObjects()
         {
@@ -99,29 +112,29 @@ namespace RapidORM.Client.SQL
 
             return objects;
         }
-        
-        public List<T> GetObjectsByCriteria(string field, string criteria)
+
+        public IEnumerable<T> GetObjectsByCriteria(string field, string criteria)
         {
             return GetObjectsByCriteria(GetField(field), criteria);
         }
 
-        public List<T> GetObjectsByCriteria(List<SearchCriteria> searchCriteriaList)
+        public IEnumerable<T> GetObjectsByCriteria(List<SearchCriteria> searchCriteriaList)
         {
             return GetObjectsByMultipleCriterias(searchCriteriaList);
         }
 
-        public List<T> GetObjectsByCriteria(SearchCriteria searchCriteria)
+        public IEnumerable<T> GetObjectsByCriteria(SearchCriteria searchCriteria)
         {
             return GetObjectsByCriteria(GetField(searchCriteria.Column), searchCriteria.Value);
         }
 
-        public List<T> GetObjectsByCriteria(string criteria)
+        public IEnumerable<T> GetObjectsByCriteria(string criteria)
         {
             PropertyInfo primaryKey = GetPrimaryKey();
             return GetObjectsByCriteria(primaryKey, criteria);
         }
 
-        public List<T> GetObjectsByMultipleCriterias(List<SearchCriteria> searchCriteriaList)
+        public IEnumerable<T> GetObjectsByMultipleCriterias(List<SearchCriteria> searchCriteriaList)
         {
             string table = tableName;
 
@@ -137,22 +150,9 @@ namespace RapidORM.Client.SQL
 
             return GetValues(strSQL);
         }
-        #endregion
+        #endregion        
 
-        #region Delete
-        public void DeleteObject(T o)
-        {
-            PropertyInfo primaryKey = GetPrimaryKey();
-            DeleteObject(o, primaryKey);
-        }
-
-        public void DeleteObject(T o, string field)
-        {
-            DeleteObject(o, GetField(field));
-        }
-        #endregion
-
-
+        #region Pending Implementation
         public void InsertObjectWithImage(T o)
         {
             throw new NotImplementedException();
@@ -164,10 +164,10 @@ namespace RapidORM.Client.SQL
             throw new NotImplementedException();
         }
 
-
         public void SaveChangesWithImage(T o)
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }
