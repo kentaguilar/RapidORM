@@ -1,4 +1,4 @@
-<img src="http://deepmirage.com/git/rapidorm.png" alt="koa middleware framework for nodejs" width="255px" />
+<img src="http://deepmirage.com/git/rapidorm.png" alt="RapidORM" width="600px" />
 
 Expressive, dynamic and functional Object Relational Mapping technology that allows you to easily perform CRUD operations. RapidORM lets you focus more on the behavior of the app instead of spending more time with the DB communication.
 <br/><br/>
@@ -37,7 +37,99 @@ namespace RapidORM.Tests.Core
         }
     }
 }
+```
+
+- Now, create your model. Your model should be the counterpart of your DB table. Hence, if I have a "department" table, you could have a "Department" class as well. Please also note that you can interactively create your model using the RapiORM Entity Creator.
 
 - Reference the basic libraries -> RapidORM.Data, RapidORM.Helpers, RapidORM.Interfaces. You can choose what library to remove and/or add depending on your requirements.
 
--  
+- Map your properties
+
+```c#
+[IsPrimaryKey(true)]
+[ColumnName("ID")]
+public int Id { get; set; }
+
+[ColumnName("Column1")]
+public string Column1 { get; set; }
+```
+
+- Declare the DB Entity
+
+```c#
+private SqlEntity<MyClass> dbEntity = null;
+```
+
+- Instantiate user entity on default constructor
+
+```c#
+public MyClass()
+{
+    dbEntity = new SqlEntity<MyClass>();
+}
+```
+
+- Create constructor required for data retrieval
+
+```c#
+public MyClass(Dictionary<string, object> args)
+{
+    Id = Convert.ToInt32(args["ID"].ToString());
+    Column1 = args["Column1"].ToString();         
+}
+```
+
+- Here's the sample model.
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RapidORM.Data;
+using RapidORM.Helpers;
+using RapidORM.Attributes;
+using RapidORM.Interfaces;
+using RapidORM.Client.MySQL;
+using RapidORM.Common;
+
+namespace MyNamespace
+{
+    [TableName("DB Table Name")]
+    public class MyClass
+    {
+        [IsPrimaryKey(true)]
+        [ColumnName("ID")]
+        public int Id { get; set; }
+
+        [ColumnName("Column1")]
+        public string Column1 { get; set; }
+
+        private SqlEntity<MyClass> dbEntity = null;
+
+        public MyClass()
+        {
+            dbEntity = new SqlEntity<MyClass>();
+        }
+
+        //Required for Data Retrieval
+        public MyClass(Dictionary<string, object> args)
+        {
+            Id = Convert.ToInt32(args["ID"].ToString());
+            Column1 = args["Column1"].ToString();         
+        }
+
+        public void GetAllUserProfiles()
+        {
+            var myList = dbEntity.GetAllObjects();
+            foreach (var item in myList)
+            {
+                Console.WriteLine(item.Column1);
+            }
+        }
+
+        //Your other methods here(Please see the test project for reference)
+    }
+}
+```
