@@ -45,11 +45,34 @@ namespace RapidORM.Tests.Models.MySQL
             dbEntity.SaveChanges(department);
         }
 
+        public int InsertDepartmentAndReturnsAnId(Department department)
+        {
+            int returnedId = dbEntity.InsertObjectAndReturnsId(department);
+
+            return returnedId;
+        }
+
+        public void DeleteDepartmentByFieldName()
+        {
+            dbEntity.DeleteObject(new Department 
+            { 
+                Name = "Inventory"
+            }, "name");
+        }
+
+        public void DeleteDepartmentByObject()
+        {
+            dbEntity.DeleteObject(new Department 
+            { 
+                Id = 3
+            });
+        }
+
         public IEnumerable<Department> GetAllDepartments()
         {
             IEnumerable<Department> departments = dbEntity.GetAllObjects();
 
-            return departments;
+            return (departments.Count() > 0) ? departments : null;
         }
 
         public IEnumerable<Department> GetDepartmentByDate(DateTime givenDate)
@@ -60,7 +83,33 @@ namespace RapidORM.Tests.Models.MySQL
                 Value = givenDate.ToString("yyyy-MM-dd")
             });
 
-            return departments;
+            return (departments.Count() > 0) ? departments : null;
+        }
+
+        public IEnumerable<Department> GetDepartmentsByStringCriteria()
+        {
+            var departments = dbEntity.GetObjectsByCriteria("id", "47");
+
+            return (departments.Count() > 0) ? departments : null;
+        }
+
+        public IEnumerable<Department> GetDepartmentsByMultipleCriteria(string name, DateTime givenDate)
+        {
+            var departments = dbEntity.GetObjectsByMultipleCriterias(new List<SearchCriteria> 
+            { 
+                new SearchCriteria
+                {
+                    Column = PropertyHelper.GetPropertyName(() => this.Name),
+                    Value = name
+                },
+                new SearchCriteria
+                {
+                    Column = PropertyHelper.GetPropertyName(() => this.DateCreated),
+                    Value = givenDate.ToString("yyyy-MM-dd")
+                }
+            });
+
+            return (departments.Count() > 0) ? departments : null;
         }
         #endregion
     }
