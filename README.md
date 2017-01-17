@@ -1,7 +1,5 @@
 <img src="http://deepmirage.com/git/rapidorm.png" alt="koa middleware framework for nodejs" width="255px" />
 
-# Rapid ORM
-
 Expressive, dynamic and functional Object Relational Mapping technology that allows you to easily perform CRUD operations. RapidORM lets you focus more on the behavior of the app instead of spending more time with the DB communication.
 <br/><br/>
 More so, RapidORM supports multiple databases in the industry(and growing). <br/>
