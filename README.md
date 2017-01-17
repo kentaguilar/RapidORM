@@ -1,4 +1,4 @@
-<img src="http://deepmirage.com/git/rapidorm.png" alt="RapidORM" width="600px" />
+<img src="http://deepmirage.com/git/rapidorm.png" alt="RapidORM" width="320px" />
 
 Expressive, dynamic and functional Object Relational Mapping technology that allows you to easily perform CRUD operations. RapidORM lets you focus more on the behavior of the app instead of spending more time with the DB communication.
 <br/><br/>
@@ -133,3 +133,5 @@ namespace MyNamespace
     }
 }
 ```
+
+- That should be it.
