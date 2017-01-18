@@ -18,7 +18,7 @@ namespace RapidORM.Tests.Tests
 
         public DepartmentTest()
         {
-            Database.UseMySqlDb();
+            Database.UseDb(DBType.MySql);
             department = new Department();
         }
 
@@ -27,7 +27,7 @@ namespace RapidORM.Tests.Tests
         {            
             department.Save(new Department 
             { 
-                Name = "Human Resource",
+                Name = "Finance",
                 DateCreated = DateHelper.GetDateTimeForDB()
             });
 

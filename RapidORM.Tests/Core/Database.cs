@@ -9,18 +9,16 @@ namespace RapidORM.Tests.Core
 {
     public class Database
     {
-        public static void UseSqlDb()
+        public static void UseDb(DBType dbType)
         {
-            DBContext.ConnectionString = new DBConnection()
+            switch (dbType)
             {
-                Server = "",
-                Database = "",
-                Username = "",
-                Password = ""
-            };
+                case DBType.MySql: ConnectNow(); break;
+                default: ConnectNow(); break;
+            }
         }
 
-        public static void UseMySqlDb()
+        private static void ConnectNow()
         {
             DBContext.ConnectionString = new DBConnection()
             {

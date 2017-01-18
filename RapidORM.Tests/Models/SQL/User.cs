@@ -15,7 +15,7 @@ using System.Data.Common;
 namespace RapidORM.Tests.Models.SQL
 {
     [TableName("SystemUser")]
-    public class User
+    public class SystemUser
     {
         [IsPrimaryKey(true)]
         public int ID { get; set; }
@@ -32,14 +32,14 @@ namespace RapidORM.Tests.Models.SQL
         [ColumnName("DesignatedPosition")]
         public string DesignatedPosition { get; set; }
 
-        private SqlEntity<User> dbEntity = null;
+        private SqlEntity<SystemUser> dbEntity = null;
 
-        public User()
+        public SystemUser()
         {
-            dbEntity = new SqlEntity<User>();
+            dbEntity = new SqlEntity<SystemUser>();
         }
 
-        public User(Dictionary<string, object> args)
+        public SystemUser(Dictionary<string, object> args)
         {
             ID = Convert.ToInt32(args["Id"].ToString());
             Name = args["Name"].ToString();
@@ -49,18 +49,74 @@ namespace RapidORM.Tests.Models.SQL
         }
 
         #region Instance Methods
-        public void SaveUser()
+        public void Save(SystemUser user)
         {
-            dbEntity.SaveChanges(new User
+            dbEntity.SaveChanges(user);            
+        }
+
+        public int InsertUserAndReturnAnId(SystemUser user)
+        {
+            int returnedId = dbEntity.InsertObjectAndReturnsId(user);
+
+            return returnedId;
+        }
+
+        public void DeleteUserByPropertyName(string fieldValue)
+        {
+            dbEntity.DeleteObject(new SystemUser
             {
-                Name = "Cersei Lannister",
-                Email = "cersei@gmail.com",
-                Password = "cersei123",
-                DesignatedPosition = "queen"
+                Email = fieldValue
+            }, "Email");
+        }
+
+        public void DeleteUserByObject(SystemUser user)
+        {
+            dbEntity.DeleteObject(user);
+        }
+
+        public IEnumerable<SystemUser> GetAllSystemUsers()
+        {
+            IEnumerable<SystemUser> systemUsers = dbEntity.GetAllObjects();
+
+            return (systemUsers.Count() > 0) ? systemUsers : null;
+        }
+
+        public IEnumerable<SystemUser> GetUserByDesignatedPosition(string designatedPosition)
+        {
+            var systemUsers = dbEntity.GetObjectsByCriteria(new SearchCriteria
+            {
+                Column = PropertyHelper.GetPropertyName(() => this.DesignatedPosition),
+                Value = designatedPosition
             });
 
-            Console.WriteLine("Data Saved");
-        }       
+            return (systemUsers.Count() > 0) ? systemUsers : null;
+        }
+
+        public IEnumerable<SystemUser> GetUsersByStringCriteria(int id)
+        {
+            var systemUsers = dbEntity.GetObjectsByCriteria("Id", id.ToString());
+
+            return (systemUsers.Count() > 0) ? systemUsers : null;
+        }
+
+        public IEnumerable<SystemUser> GetUsersByMultipleCriteria(string name, string designatedPosition)
+        {
+            var systemUsers = dbEntity.GetObjectsByMultipleCriterias(new List<SearchCriteria> 
+            { 
+                new SearchCriteria
+                {
+                    Column = PropertyHelper.GetPropertyName(() => this.Name),
+                    Value = name
+                },
+                new SearchCriteria
+                {
+                    Column = PropertyHelper.GetPropertyName(() => this.DesignatedPosition),
+                    Value = designatedPosition
+                }
+            });
+
+            return (systemUsers.Count() > 0) ? systemUsers : null;
+        }
         #endregion
     }
 }
