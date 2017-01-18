@@ -18,7 +18,7 @@ namespace RapidORM.Tests.Models.SQL
     public class SystemUser
     {
         [IsPrimaryKey(true)]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [ColumnName("Name")]
         public string Name { get; set; }
@@ -41,7 +41,7 @@ namespace RapidORM.Tests.Models.SQL
 
         public SystemUser(Dictionary<string, object> args)
         {
-            ID = Convert.ToInt32(args["Id"].ToString());
+            Id = Convert.ToInt32(args["Id"].ToString());
             Name = args["Name"].ToString();
             Email = args["Email"].ToString();
             Password = args["Password"].ToString();
