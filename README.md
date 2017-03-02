@@ -1,4 +1,4 @@
-<img src="http://deepmirage.com/git/rapidormlogo.png" alt="RapidORM" width="300px"/>
+<img src="http://www.deepmirage.com/git/rapidormlogo.png" alt="RapidORM" width="300px"/>
 
 Expressive, dynamic and functional Object Relational Mapping technology that allows you to easily perform CRUD operations. RapidORM lets you focus more on the behavior of the app instead of spending more time with the DB communication.
 <br/><br/>
