@@ -12,15 +12,17 @@ namespace RapidORM.Data
         public string Database { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public bool IsWindowsAuthentication { get; set; }
 
         public DBConnection() { }
 
-        public DBConnection(string server, string database, string username, string password)
+        public DBConnection(string server, string database, string username, string password, bool isWindowsAuthentication)
         {
             this.Server = server;
             this.Database = database;
             this.Username = username;
             this.Password = password;
+            this.IsWindowsAuthentication = isWindowsAuthentication;
         }
 
     }

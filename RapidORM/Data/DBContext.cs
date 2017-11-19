@@ -13,8 +13,16 @@ namespace RapidORM.Data
 
         public static string GetSqlConnection()
         {
-            string connection = @"Data Source=" + ConnectionString.Server + ";Initial Catalog=" + ConnectionString.Database;
-            connection += ";Persist Security Info=True;User ID=" + ConnectionString.Username + ";Password=" + ConnectionString.Password;
+            string connection = string.Empty;
+            if (ConnectionString.IsWindowsAuthentication)
+            {
+                connection = "Data Source=" + ConnectionString.Server + ";Initial Catalog=" + ConnectionString.Database + ";Integrated Security=True;";
+            }
+            else
+            {
+                connection = @"Data Source=" + ConnectionString.Server + ";Initial Catalog=" + ConnectionString.Database;
+                connection += ";Persist Security Info=True;User ID=" + ConnectionString.Username + ";Password=" + ConnectionString.Password;
+            }
 
             return connection;
         }
