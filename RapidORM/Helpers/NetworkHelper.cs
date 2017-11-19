@@ -20,7 +20,6 @@ namespace RapidORM.Helpers
                 direction = stream.ReadToEnd();
             }
 
-            //Search for the ip in the html
             int first = direction.IndexOf("Address: ") + 9;
             int last = direction.LastIndexOf("</body>");
             direction = direction.Substring(first, last - first);

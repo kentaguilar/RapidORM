@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Security.Cryptography;
+using System.Configuration;
 
 namespace RapidORM.Helpers
 {
@@ -34,9 +36,15 @@ namespace RapidORM.Helpers
 
         public static void WriteToFile(string content)
         {
+            string directory = @"logs\";
             string time = DateTime.Now.ToString("MMddyyyy");
-            string path = @"logs\" + time + ".log";
+            string path = directory + time + ".log";
             string contentToAppend = string.Format("\n[{0}] - {1}", DateTime.Now.ToString("HH:mm:ss"), content);
+
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
 
             if (!File.Exists(path))
             {
@@ -45,6 +53,27 @@ namespace RapidORM.Helpers
             else
             {
                 File.AppendAllLines(path, new[] { contentToAppend });
+            }
+        }
+
+        public static void CreateCsvFile(string filePath, List<string> csvContentArr)
+        {
+            var csv = new StringBuilder();
+            for (var i = 0; i < csvContentArr.Count; i++)
+            {
+                csv.AppendLine(csvContentArr[i]);
+            }
+
+            File.WriteAllText(filePath, csv.ToString());
+        }
+
+        public static string GetFileChecksum(string path)
+        {
+            using (var stream = new BufferedStream(File.OpenRead(path), 1200000))
+            {
+                SHA256Managed sha = new SHA256Managed();
+                byte[] checksum = sha.ComputeHash(stream);
+                return BitConverter.ToString(checksum).Replace("-", String.Empty);
             }
         }
 
@@ -106,6 +135,23 @@ namespace RapidORM.Helpers
             catch (Exception exceptionObj)
             {
                 throw new Exception(exceptionObj.ToString());
+            }
+        }
+
+        public static List<string> ReadCsvFile(string sourceCsvFile)
+        {            
+            using (var reader = new StreamReader(sourceCsvFile))
+            {
+                List<string> urlList = new List<string>();
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+
+                    urlList.Add(values[0]);
+                }
+
+                return urlList;
             }
         }
     }

@@ -4,11 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Globalization;
 
 namespace RapidORM.Helpers
 {
     public class StringHelper
     {
+        public static string ParseStringToCSVCell(string str)
+        {
+            bool mustQuote = (str.Contains(",") || str.Contains("\"") || str.Contains("\r") || str.Contains("\n"));
+            if (mustQuote)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("\"");
+                foreach (char nextChar in str)
+                {
+                    sb.Append(nextChar);
+                    if (nextChar == '"')
+                        sb.Append("\"");
+                }
+                sb.Append("\"");
+                return sb.ToString();
+            }
+
+            return str;
+        }
+
+        public static bool IsUSPhoneNumber(string number)
+        {
+            string regExPattern = @"^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$";
+            return MatchStringFromRegex(number, regExPattern);
+        }
+
+        public static bool MatchStringFromRegex(string str, string regexstr)
+        {
+            str = str.Trim();
+            System.Text.RegularExpressions.Regex pattern = new System.Text.RegularExpressions.Regex(regexstr);
+            return pattern.IsMatch(str);
+        }
+
         public static string[] GenerateCharacterPasswordCombination(Random random)
         {
             string targetCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -103,6 +137,29 @@ namespace RapidORM.Helpers
                 iPos = strSource.IndexOf(strToCount);
             }
             return iCount;
+        }
+
+        public static string UpperCaseFirst(string rawText)
+        {
+            rawText = rawText.ToLower();
+            if (string.IsNullOrEmpty(rawText))
+            {
+                return string.Empty;
+            }
+
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(rawText.ToLower());
+        }
+
+        public static string TruncateLongString(string rawString, int maxLength)
+        {
+            string result = string.Empty;
+
+            if (rawString != null)
+            {
+                result = rawString.Length > maxLength ? rawString.Substring(0, maxLength) : rawString;
+            }
+
+            return result;
         }
 
         public static String ReverseString(String strParam)
