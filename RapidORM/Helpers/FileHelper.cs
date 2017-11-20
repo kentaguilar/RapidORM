@@ -36,15 +36,9 @@ namespace RapidORM.Helpers
 
         public static void WriteToFile(string content)
         {
-            string directory = @"logs\";
             string time = DateTime.Now.ToString("MMddyyyy");
-            string path = directory + time + ".log";
+            string path = @"logs\" + time + ".log";
             string contentToAppend = string.Format("\n[{0}] - {1}", DateTime.Now.ToString("HH:mm:ss"), content);
-
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
 
             if (!File.Exists(path))
             {

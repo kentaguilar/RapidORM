@@ -68,6 +68,8 @@
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\FormHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Helpers\LogHelper.cs" />
+    <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Helpers\NetworkHelper.cs" />
     <Compile Include="Helpers\NumberHelper.cs" />
     <Compile Include="Helpers\PropertyHelper.cs" />
