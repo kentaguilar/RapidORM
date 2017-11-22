@@ -22,9 +22,9 @@ namespace RapidORM.Tests.Core
         {
             DBContext.ConnectionString = new DBConnection()
             {
-                Server = "",
-                Database = "",
-                Username = "",
+                Server = "localhost",
+                Database = "rapidorm",
+                Username = "root",
                 Password = ""
             };
         }

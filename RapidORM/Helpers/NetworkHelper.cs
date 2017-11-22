@@ -55,9 +55,15 @@ namespace RapidORM.Helpers
             bool result = false;
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(sourceServerLocation);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(sourceServerLocation));
                 request.Method = WebRequestMethods.Ftp.DownloadFile;
+
                 request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                request.Proxy = null;
+                request.UsePassive = false;
+                request.UseBinary = true;
+                request.KeepAlive = false;
+
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
 
                 Stream responseStream = response.GetResponseStream();
