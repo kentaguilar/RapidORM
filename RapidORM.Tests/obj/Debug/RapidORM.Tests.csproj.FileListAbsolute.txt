@@ -1,7 +1,9 @@
-I:\Projects\RapidORM\RapidORM.Tests\obj\Debug\RapidORM.Tests.csprojResolveAssemblyReference.cache
 I:\Projects\RapidORM\RapidORM.Tests\bin\Debug\RapidORM.Tests.dll
 I:\Projects\RapidORM\RapidORM.Tests\bin\Debug\RapidORM.Tests.pdb
+I:\Projects\RapidORM\RapidORM.Tests\bin\Debug\MySql.Data.dll
 I:\Projects\RapidORM\RapidORM.Tests\bin\Debug\RapidORM.dll
+I:\Projects\RapidORM\RapidORM.Tests\bin\Debug\System.Data.SQLite.dll
 I:\Projects\RapidORM\RapidORM.Tests\bin\Debug\RapidORM.pdb
+I:\Projects\RapidORM\RapidORM.Tests\obj\Debug\RapidORM.Tests.csprojResolveAssemblyReference.cache
 I:\Projects\RapidORM\RapidORM.Tests\obj\Debug\RapidORM.Tests.dll
 I:\Projects\RapidORM\RapidORM.Tests\obj\Debug\RapidORM.Tests.pdb

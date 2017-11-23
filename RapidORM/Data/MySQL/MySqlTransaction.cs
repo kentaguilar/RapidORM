@@ -130,7 +130,7 @@ namespace RapidORM.Data.MySQL
 
         protected MySqlDataReader GetMySqlDataReader(string sql)
         {
-            var connection = new MySqlConnection(DBContext.GetSqlConnection());
+            var connection = new MySqlConnection(DBContext.GetMySqlConnection());
             connection.Open();
             MySqlCommand database = new MySqlCommand(sql, connection);
             MySqlDataReader reader = database.ExecuteReader(CommandBehavior.CloseConnection);

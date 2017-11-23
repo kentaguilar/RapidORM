@@ -14,6 +14,7 @@ namespace RapidORM.Tests.Core
             switch (dbType)
             {
                 case DBType.MySql: ConnectToDb(); break;
+                case DBType.SQLite: ConnectToSQLite(); break;
                 default: ConnectToDb(); break;
             }
         }
@@ -26,6 +27,14 @@ namespace RapidORM.Tests.Core
                 Database = "rapidorm",
                 Username = "root",
                 Password = ""
+            };
+        }
+
+        private static void ConnectToSQLite()
+        {
+            DBContext.ConnectionString = new DBConnection() 
+            { 
+                Database = "rapidorm.sqlite"
             };
         }
     }

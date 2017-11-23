@@ -18,6 +18,11 @@ namespace RapidORM.Data.SQLite
             tableName = GetTableName();
         }
 
+        public void CreateDatabase(string databaseName)
+        {
+            MakeNewDatabase(databaseName);
+        }
+
         #region Save Changes
         public void SaveChanges(T o)
         {

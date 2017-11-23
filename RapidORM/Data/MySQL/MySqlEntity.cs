@@ -184,5 +184,10 @@ namespace RapidORM.Data.MySQL
             return GetValues(strSQL);
         }
         #endregion        
+    
+        public void CreateDatabase(string databaseName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

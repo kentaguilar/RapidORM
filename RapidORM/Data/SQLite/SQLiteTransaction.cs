@@ -8,12 +8,13 @@ using System.Data;
 using System.Reflection;
 using RapidORM.Data;
 using RapidORM.Data.Common;
+using RapidORM.Helpers;
 
 namespace RapidORM.Data.SQLite
 {
     public class SQLiteTransaction<T> : Query<T>
     {
-        protected void CreateDatabase(string databaseName)
+        protected void MakeNewDatabase(string databaseName)
         {
             SQLiteConnection.CreateFile(string.Format("{0}.sqlite", databaseName));
         }
@@ -24,6 +25,7 @@ namespace RapidORM.Data.SQLite
             {
                 try
                 {
+                    LogHelper.Log(sql);
                     var command = new SQLiteCommand(sql, conn);
                     conn.Open();
                     command.ExecuteNonQuery();
@@ -37,7 +39,7 @@ namespace RapidORM.Data.SQLite
 
         protected void ExecuteNonQuery(ImageParameterQueryContainer imageParameterQueryContainer)
         {
-            using (var conn = new SQLiteConnection(DBContext.GetMySqlConnection()))
+            using (var conn = new SQLiteConnection(DBContext.GetSQLiteConnection()))
             {
                 try
                 {
@@ -60,7 +62,7 @@ namespace RapidORM.Data.SQLite
 
         protected object ExecuteScalar(string sql)
         {
-            using (var conn = new SQLiteConnection(DBContext.GetMySqlConnection()))
+            using (var conn = new SQLiteConnection(DBContext.GetSQLiteConnection()))
             {
                 try
                 {
@@ -105,7 +107,7 @@ namespace RapidORM.Data.SQLite
 
         protected string GetSingleValue(string sql, string field)
         {
-            using (var conn = new SQLiteConnection(DBContext.GetMySqlConnection()))
+            using (var conn = new SQLiteConnection(DBContext.GetSQLiteConnection()))
             {
                 try
                 {
@@ -130,7 +132,7 @@ namespace RapidORM.Data.SQLite
 
         protected SQLiteDataReader GetSQLiteDataReader(string sql)
         {
-            var connection = new SQLiteConnection(DBContext.GetSqlConnection());
+            var connection = new SQLiteConnection(DBContext.GetSQLiteConnection());
             connection.Open();
             SQLiteCommand database = new SQLiteCommand(sql, connection);
             SQLiteDataReader reader = database.ExecuteReader(CommandBehavior.CloseConnection);

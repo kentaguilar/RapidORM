@@ -58,6 +58,7 @@
     <Compile Include="Data\MySQL\MySqlQueryBuilder.cs" />
     <Compile Include="Data\MySQL\MySqlTransaction.cs" />
     <Compile Include="Data\SQLite\SQLiteEntity.cs" />
+    <Compile Include="Data\SQLite\SQLiteQueryBuilder.cs" />
     <Compile Include="Data\SQLite\SQLiteTransaction.cs" />
     <Compile Include="Data\SQL\SqlEntity.cs" />
     <Compile Include="Data\SQL\SqlQueryBuilder.cs" />

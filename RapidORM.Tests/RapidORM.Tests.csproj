@@ -65,11 +65,14 @@
     <Compile Include="Core\DBType.cs" />
     <Compile Include="CustomQueries\MySqlQueryBuilderTest.cs" />
     <Compile Include="CustomQueries\SqlQueryBuilderTest.cs" />
+    <Compile Include="CustomQueries\SQLiteQueryBuilderTest.cs" />
     <Compile Include="Models\MySQL\Department.cs" />
+    <Compile Include="Models\SQLite\Employee.cs" />
     <Compile Include="Models\SQL\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\DepartmentTest.cs" />
     <Compile Include="Tests\Helpers\NetworkHelperTest.cs" />
+    <Compile Include="Tests\EmployeeTest.cs" />
     <Compile Include="Tests\UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DatabaseStructure\" />
-    <Folder Include="Models\SQLite\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

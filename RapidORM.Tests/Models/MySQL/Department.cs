@@ -23,11 +23,11 @@ namespace RapidORM.Tests.Models.MySQL
         [ColumnName("date_created")]
         public string DateCreated { get; set; }
         
-        private IDBEntity<Department> dbEntity = null;
+        private IDBEntity<Department> dbContext = null;
 
         public Department()
         {
-            dbEntity = new MySqlEntity<Department>();
+            dbContext = new MySqlEntity<Department>();
         }
         
         public Department(Dictionary<string, object> args)
@@ -40,19 +40,19 @@ namespace RapidORM.Tests.Models.MySQL
         #region Class Methods
         public void Save(Department department)
         {
-            dbEntity.SaveChanges(department);
+            dbContext.SaveChanges(department);
         }
 
         public int InsertDepartmentAndReturnAnId(Department department)
         {
-            int returnedId = dbEntity.InsertObjectAndReturnsId(department);
+            int returnedId = dbContext.InsertObjectAndReturnsId(department);
 
             return returnedId;
         }
 
         public void DeleteDepartmentByPropertyName(string fieldValue)
         {
-            dbEntity.DeleteObject(new Department 
+            dbContext.DeleteObject(new Department 
             { 
                 Name = fieldValue
             }, "Name");
@@ -60,19 +60,19 @@ namespace RapidORM.Tests.Models.MySQL
 
         public void DeleteDepartmentByObject(Department department)
         {
-            dbEntity.DeleteObject(department);
+            dbContext.DeleteObject(department);
         }
 
         public IEnumerable<Department> GetAllDepartments()
         {
-            IEnumerable<Department> departments = dbEntity.GetAllObjects();
+            IEnumerable<Department> departments = dbContext.GetAllObjects();
 
             return (departments.Count() > 0) ? departments : null;
         }
 
         public IEnumerable<Department> GetDepartmentsByDate(DateTime givenDate)
         {
-            var departments = dbEntity.GetObjectsByCriteria(new SearchCriteria
+            var departments = dbContext.GetObjectsByCriteria(new SearchCriteria
             {
                 Column = PropertyHelper.GetPropertyName(() => this.DateCreated),
                 Value = givenDate.ToString("yyyy-MM-dd")
@@ -83,14 +83,14 @@ namespace RapidORM.Tests.Models.MySQL
 
         public IEnumerable<Department> GetDepartmentsByStringCriteria(int id)
         {
-            var departments = dbEntity.GetObjectsByCriteria("Id", id.ToString());
+            var departments = dbContext.GetObjectsByCriteria("Id", id.ToString());
 
             return (departments.Count() > 0) ? departments : null;
         }
 
         public IEnumerable<Department> GetDepartmentsByMultipleCriteria(string name, DateTime givenDate)
         {
-            var departments = dbEntity.GetObjectsByMultipleCriterias(new List<SearchCriteria> 
+            var departments = dbContext.GetObjectsByMultipleCriterias(new List<SearchCriteria> 
             { 
                 new SearchCriteria
                 {
