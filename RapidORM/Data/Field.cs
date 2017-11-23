@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.IO;
-using RapidORM.Attributes;
+using RapidORM.Data.Common;
 
 namespace RapidORM.Data
 {

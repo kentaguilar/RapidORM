@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
-namespace RapidORM.Interfaces
+namespace RapidORM.Data.Common
 {
     public interface IQueryBuilder
     {

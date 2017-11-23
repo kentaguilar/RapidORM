@@ -9,6 +9,7 @@ namespace RapidORM.Tests.Core
     public enum DBType
     {
         SQL,
-        MySql
+        MySql,
+        SQLite
     }
 }

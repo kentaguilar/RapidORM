@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Reflection;
 using RapidORM.Data;
 
-namespace RapidORM.Client.SQL
+namespace RapidORM.Data.SQL
 {
     public class SqlTransaction<T> : Query<T>
     {

@@ -7,10 +7,10 @@ using System.Reflection;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using RapidORM.Interfaces;
+using RapidORM.Data.Common;
 using RapidORM.Data;
 
-namespace RapidORM.Client.SQL
+namespace RapidORM.Data.SQL
 {
     public class SqlQueryBuilder : IQueryBuilder
     {

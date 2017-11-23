@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RapidORM.Data;
-using RapidORM.Client.MySQL;
-using RapidORM.Interfaces;
+using RapidORM.Data.Common;
+using RapidORM.Data.MySQL;
 using RapidORM.Helpers;
 using RapidORM.Tests.Core;
 using MySql.Data.MySqlClient;

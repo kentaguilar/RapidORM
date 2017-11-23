@@ -4,8 +4,8 @@ using System.Linq;
 using RapidORM.Data;
 using RapidORM.Helpers;
 using RapidORM.Tests.Core;
-using RapidORM.Interfaces;
-using RapidORM.Client.MySQL;
+using RapidORM.Data.Common;
+using RapidORM.Data.MySQL;
 using RapidORM.Tests.Models.MySQL;
 using System.Collections.Generic;
 

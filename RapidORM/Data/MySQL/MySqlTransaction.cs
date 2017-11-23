@@ -7,9 +7,9 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Reflection;
 using RapidORM.Data;
-using RapidORM.Common;
+using RapidORM.Data.Common;
 
-namespace RapidORM.Client.MySQL
+namespace RapidORM.Data.MySQL
 {
     public class MySqlTransaction<T> : Query<T>
     {

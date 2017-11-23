@@ -7,10 +7,10 @@ using System.Reflection;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Data.Common;
-using RapidORM.Interfaces;
 using RapidORM.Data;
+using RapidORM.Data.Common;
 
-namespace RapidORM.Client.MySQL
+namespace RapidORM.Data.MySQL
 {
     public class MySqlQueryBuilder : IQueryBuilder
     {

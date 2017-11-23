@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RapidORM.Attributes
+namespace RapidORM.Data.Common
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class IsPrimaryKey : System.Attribute

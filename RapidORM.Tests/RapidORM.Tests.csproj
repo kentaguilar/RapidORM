@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DatabaseStructure\" />
+    <Folder Include="Models\SQLite\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

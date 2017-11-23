@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RapidORM.Common
+namespace RapidORM.Data.Common
 {
     public class ImageParameter
     {

@@ -1,25 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
+using RapidORM.Data.Common;
 using RapidORM.Data;
-using RapidORM.Interfaces;
-using RapidORM.Common;
 
-namespace RapidORM.Client.MySQL
+namespace RapidORM.Data.SQL
 {
-    public class MySqlEntity<T> : MySqlTransaction<T>, IDBEntity<T>
+    public class SqlEntity<T> : SqlTransaction<T>, IDBEntity<T>
     {
         public string tableName = string.Empty;
 
-        public MySqlEntity()
+        public SqlEntity()
         {
             tableName = GetTableName();
         }
 
-        #region Save Changes
         public void SaveChanges(T o)
         {
             if (CheckIfAlreadyExists(o))
@@ -32,51 +33,12 @@ namespace RapidORM.Client.MySQL
             }
         }
 
-        public void SaveChangesWithImage(T o)
-        {
-            if (CheckIfAlreadyExists(o))
-            {
-                UpdateObjectWithImage(o);
-            }
-            else
-            {
-                InsertObjectWithImage(o);
-            }
-        }
-        #endregion
-
-        #region Update
-        public void UpdateObject(T o)
-        {
-            try
-            {
-                ExecuteNonQuery(CreateUpdateQuery(o));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-        }
-
-        public void UpdateObjectWithImage(T o)
-        {
-            try
-            {
-                ExecuteNonQuery(CreateUpdateQueryWithImage(o));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-        }
-        #endregion
-
         #region Create
         public int InsertObjectAndReturnsId(T o)
         {
             try
             {
-                return Convert.ToInt32(ExecuteScalar(CreateInsertQuery(o)));
+                return ExecuteScalar(CreateInsertQuery(o));
             }
             catch (Exception ex)
             {
@@ -107,19 +69,21 @@ namespace RapidORM.Client.MySQL
                 throw new Exception(ex.ToString());
             }
         }
+        #endregion
 
-        public void InsertObjectWithImage(T o)
+        #region Update
+        public void UpdateObject(T o)
         {
             try
             {
-                ExecuteNonQuery(CreateInsertQueryWithImage(o));
+                ExecuteNonQuery(CreateUpdateQuery(o));
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }
         }
-        #endregion
+        #endregion        
 
         #region Delete
         public void DeleteObject(T o)
@@ -134,7 +98,7 @@ namespace RapidORM.Client.MySQL
         }
         #endregion
 
-        #region Retrieval
+        #region Retrieval        
         public IEnumerable<T> GetAllObjects()
         {
             IEnumerable<T> objects = null;
@@ -185,5 +149,23 @@ namespace RapidORM.Client.MySQL
             return GetValues(strSQL);
         }
         #endregion        
+
+        #region Pending Implementation
+        public void InsertObjectWithImage(T o)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void UpdateObjectWithImage(T o)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChangesWithImage(T o)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

@@ -50,25 +50,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ColumnName.cs" />
-    <Compile Include="Attributes\IsImage.cs" />
-    <Compile Include="Attributes\IsPrimaryKey.cs" />
-    <Compile Include="Attributes\TableName.cs" />
-    <Compile Include="Client\MySQL\MySqlEntity.cs" />
-    <Compile Include="Client\MySQL\MySqlQueryBuilder.cs" />
-    <Compile Include="Client\MySQL\MySqlTransaction.cs" />
-    <Compile Include="Client\SQLite\SQLiteTransaction.cs" />
-    <Compile Include="Client\SQL\SqlEntity.cs" />
-    <Compile Include="Client\SQL\SqlQueryBuilder.cs" />
-    <Compile Include="Client\SQL\SqlTransaction.cs" />
-    <Compile Include="Common\ImageParameter.cs" />
-    <Compile Include="Common\ImageParameterQueryContainer.cs" />
-    <Compile Include="Common\SearchCriteria.cs" />
+    <Compile Include="Data\Common\ColumnName.cs" />
+    <Compile Include="Data\Common\IsImage.cs" />
+    <Compile Include="Data\Common\IsPrimaryKey.cs" />
+    <Compile Include="Data\Common\TableName.cs" />
+    <Compile Include="Data\MySQL\MySqlEntity.cs" />
+    <Compile Include="Data\MySQL\MySqlQueryBuilder.cs" />
+    <Compile Include="Data\MySQL\MySqlTransaction.cs" />
+    <Compile Include="Data\SQLite\SQLiteEntity.cs" />
+    <Compile Include="Data\SQLite\SQLiteTransaction.cs" />
+    <Compile Include="Data\SQL\SqlEntity.cs" />
+    <Compile Include="Data\SQL\SqlQueryBuilder.cs" />
+    <Compile Include="Data\SQL\SqlTransaction.cs" />
+    <Compile Include="Data\Common\ImageParameter.cs" />
+    <Compile Include="Data\Common\ImageParameterQueryContainer.cs" />
+    <Compile Include="Data\Common\SearchCriteria.cs" />
     <Compile Include="Data\DBConnection.cs" />
     <Compile Include="Data\DBContext.cs" />
     <Compile Include="Data\Field.cs" />
     <Compile Include="Data\Query.cs" />
-    <Compile Include="Enums\ReturnsId.cs" />
+    <Compile Include="Data\Common\ReturnsId.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\FormHelper.cs" />
@@ -79,8 +80,8 @@
     <Compile Include="Helpers\NumberHelper.cs" />
     <Compile Include="Helpers\PropertyHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Interfaces\IDBEntity.cs" />
-    <Compile Include="Interfaces\IQueryBuilder.cs" />
+    <Compile Include="Data\Common\IDBEntity.cs" />
+    <Compile Include="Data\Common\IQueryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

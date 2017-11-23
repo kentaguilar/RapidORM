@@ -13,12 +13,12 @@ namespace RapidORM.Tests.Core
         {
             switch (dbType)
             {
-                case DBType.MySql: ConnectNow(); break;
-                default: ConnectNow(); break;
+                case DBType.MySql: ConnectToDb(); break;
+                default: ConnectToDb(); break;
             }
         }
 
-        private static void ConnectNow()
+        private static void ConnectToDb()
         {
             DBContext.ConnectionString = new DBConnection()
             {

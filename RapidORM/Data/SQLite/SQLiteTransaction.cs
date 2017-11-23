@@ -7,12 +7,17 @@ using System.Data.SQLite;
 using System.Data;
 using System.Reflection;
 using RapidORM.Data;
-using RapidORM.Common;
+using RapidORM.Data.Common;
 
-namespace RapidORM.Client.SQLite
+namespace RapidORM.Data.SQLite
 {
     public class SQLiteTransaction<T> : Query<T>
     {
+        protected void CreateDatabase(string databaseName)
+        {
+            SQLiteConnection.CreateFile(string.Format("{0}.sqlite", databaseName));
+        }
+
         protected void ExecuteNonQuery(string sql)
         {
             using (var conn = new SQLiteConnection(DBContext.GetSQLiteConnection()))

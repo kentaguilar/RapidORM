@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RapidORM.Data;
-using RapidORM.Client.SQL;
-using RapidORM.Interfaces;
+using RapidORM.Data.Common;
+using RapidORM.Data.SQL;
 using RapidORM.Helpers;
 using RapidORM.Tests.Core;
 using System.Data;

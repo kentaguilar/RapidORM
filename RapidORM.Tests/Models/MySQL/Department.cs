@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using RapidORM.Data;
 using RapidORM.Helpers;
-using RapidORM.Attributes;
-using RapidORM.Interfaces;
-using RapidORM.Client.MySQL;
-using RapidORM.Common;
+using RapidORM.Data.Common;
+using RapidORM.Data.MySQL;
 
 namespace RapidORM.Tests.Models.MySQL
 {
