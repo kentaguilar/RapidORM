@@ -35,5 +35,12 @@ namespace RapidORM.Data
 
             return connection;
         }
+
+        public static string GetSQLiteConnection()
+        {
+            string connection = string.Format(@"Data Source={0};Version=3;", ConnectionString.Database);
+
+            return connection;
+        }
     }
 }

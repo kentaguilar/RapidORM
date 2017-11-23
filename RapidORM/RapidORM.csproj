@@ -30,13 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ZioLib\ZioApp\bin\Debug\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\RapidOrm.Core.1.1.0\lib\MySql.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.106.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\RapidOrm.Core.1.1.0\lib\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -53,6 +57,7 @@
     <Compile Include="Client\MySQL\MySqlEntity.cs" />
     <Compile Include="Client\MySQL\MySqlQueryBuilder.cs" />
     <Compile Include="Client\MySQL\MySqlTransaction.cs" />
+    <Compile Include="Client\SQLite\SQLiteTransaction.cs" />
     <Compile Include="Client\SQL\SqlEntity.cs" />
     <Compile Include="Client\SQL\SqlQueryBuilder.cs" />
     <Compile Include="Client\SQL\SqlTransaction.cs" />
@@ -78,7 +83,10 @@
     <Compile Include="Interfaces\IQueryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
