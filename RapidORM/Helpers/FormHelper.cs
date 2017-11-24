@@ -10,6 +10,11 @@ namespace RapidORM.Helpers
 {
     public static class FormHelper
     {
+        /// <summary>
+        /// Show windows form message box along with your custom message
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="hasTitle"></param>
         public static void ShowMessageBox(string message, bool hasTitle = true)
         {
             MessageBox.Show(message, (hasTitle) ? ConfigurationManager.AppSettings["AppName"] : "");
