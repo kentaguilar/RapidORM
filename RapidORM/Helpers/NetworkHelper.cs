@@ -10,7 +10,11 @@ namespace RapidORM.Helpers
 {
     public class NetworkHelper
     {
-        public static string GetPublicIP()
+        /// <summary>
+        /// Gets public ip of app
+        /// </summary>
+        /// <param name=""></param>
+        public static string GetPublicIp()
         {
             String direction = "";
             WebRequest request = WebRequest.Create("http://checkip.dyndns.org/");
@@ -27,8 +31,12 @@ namespace RapidORM.Helpers
             return direction;
         }
 
-        public static bool UploadFileToFtp(string sourceLocalLocation, string destinationServerLocation,
-            string ftpUsername, string ftpPassword)
+        /// <summary>
+        /// Uploads file to FTP
+        /// </summary>
+        /// <param name="sourceLocalLocation"></param>
+        /// <param name="destinationServerLocation"></param>
+        public static bool UploadFileToFtp(string sourceLocalLocation, string destinationServerLocation, string ftpUsername, string ftpPassword)
         {
             bool result = false;
             try
@@ -49,8 +57,14 @@ namespace RapidORM.Helpers
             return result;
         }
 
-        public static bool DownloadFileFromFtp(string sourceServerLocation, string destinationLocalLocation,
-            string ftpUsername, string ftpPassword)
+        /// <summary>
+        /// Download file from FTP Server
+        /// </summary>
+        /// <param name="sourceServerLocation"></param>
+        /// <param name="destinationLocalLocation"></param>
+        /// <param name="ftpUsername"></param>
+        /// <param name="ftppassword"></param>
+        public static bool DownloadFileFromFtp(string sourceServerLocation, string destinationLocalLocation, string ftpUsername, string ftpPassword)
         {
             bool result = false;
             try

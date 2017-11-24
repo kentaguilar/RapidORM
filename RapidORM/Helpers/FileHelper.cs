@@ -12,13 +12,13 @@ namespace RapidORM.Helpers
 {
     public class FileHelper
     {
-        public enum FileType
-        {
-            CSV,
-            XLSX,
-            TXT
-        }
-
+        /// <summary>
+        /// Log a message to a user-defined directory. Default file extension is .log
+        /// Folder will be generated on the build directory of the app
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="folder"></param>
+        /// <param name="fileExtension"></param>
         public static void WriteFileToFolder(string content, string folder, string fileExtension = "log")
         {
             string currentDate = DateTime.Now.ToString("MMddyyyy");
@@ -34,6 +34,10 @@ namespace RapidORM.Helpers
             }
         }
 
+        /// <summary>
+        /// Log a message to the log folder. Somewhat similar to LogHelper.Log
+        /// </summary>
+        /// <param name="content"></param>
         public static void WriteToFile(string content)
         {
             string time = DateTime.Now.ToString("MMddyyyy");
@@ -50,17 +54,26 @@ namespace RapidORM.Helpers
             }
         }
 
-        public static void CreateCsvFile(string filePath, List<string> csvContentArr)
+        /// <summary>
+        /// Create CSV file using a user-define list of string
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="contentList"></param>
+        public static void CreateCsvFile(string filePath, List<string> contentList)
         {
             var csv = new StringBuilder();
-            for (var i = 0; i < csvContentArr.Count; i++)
+            for (var i = 0; i < contentList.Count; i++)
             {
-                csv.AppendLine(csvContentArr[i]);
+                csv.AppendLine(contentList[i]);
             }
 
             File.WriteAllText(filePath, csv.ToString());
         }
 
+        /// <summary>
+        /// Get file checksum based on a given path
+        /// </summary>
+        /// <param name="path"></param>
         public static string GetFileChecksum(string path)
         {
             using (var stream = new BufferedStream(File.OpenRead(path), 1200000))
@@ -71,6 +84,12 @@ namespace RapidORM.Helpers
             }
         }
 
+        /// <summary>
+        /// Generates a CSV file from windows form gridview
+        /// </summary>
+        /// <param name="gridResult"></param>
+        /// <param name="outputDirectory"></param>
+        /// <param name="filename"></param>
         public static void GenerateCsvFromDataGridView(DataGridView gridResult, string outputDirectory, string filename)
         {
             string outputFile = outputDirectory + filename;
@@ -132,6 +151,10 @@ namespace RapidORM.Helpers
             }
         }
 
+        /// <summary>
+        /// Reads a given CSV file
+        /// </summary>
+        /// <param name="sourceCsvFile"></param>
         public static List<string> ReadCsvFile(string sourceCsvFile)
         {            
             using (var reader = new StreamReader(sourceCsvFile))

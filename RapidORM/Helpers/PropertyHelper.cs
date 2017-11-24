@@ -9,6 +9,10 @@ namespace RapidORM.Helpers
 {
     public class PropertyHelper
     {
+        /// <summary>
+        /// Retrieves class property name
+        /// </summary>
+        /// <param name="propertyLambda"></param>
         public static string GetPropertyName<T>(Expression<Func<T>> propertyLambda)
         {
             var me = propertyLambda.Body as MemberExpression;

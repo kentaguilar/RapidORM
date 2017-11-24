@@ -24,4 +24,11 @@ namespace RapidORM.Data.Common
         MySql,
         SQLite
     }
+
+    public enum FileType
+    {
+        CSV,
+        XLSX,
+        TXT
+    }
 }

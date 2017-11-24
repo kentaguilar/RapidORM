@@ -9,6 +9,14 @@ namespace RapidORM.Helpers
 {
     public static class MailHelper
     {
+        /// <summary>
+        /// Sends user defined email
+        /// </summary>
+        /// <param name="recipient"></param>
+        /// <param name="sender"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
+        /// <param name="attachmentLocation"></param>
         public static void SendEmail(string recipient, string sender, string subject, string body, string attachmentLocation = "")
         {
             using (var smtpClient = new SmtpClient())

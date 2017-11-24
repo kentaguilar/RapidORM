@@ -8,6 +8,10 @@ namespace RapidORM.Helpers
 {
     public class NumberHelper
     {
+        /// <summary>
+        /// Generates random number
+        /// </summary>
+        /// <param name="random"></param>
         public static string[] GenerateNumberPasswordCombination(Random random)
         {
             int min = 10;
