@@ -66,11 +66,11 @@
     <Compile Include="Data\Common\ImageParameter.cs" />
     <Compile Include="Data\Common\ImageParameterQueryContainer.cs" />
     <Compile Include="Data\Common\SearchCriteria.cs" />
+    <Compile Include="Data\DBConnectionSetting.cs" />
     <Compile Include="Data\DBConnection.cs" />
-    <Compile Include="Data\DBContext.cs" />
     <Compile Include="Data\Field.cs" />
     <Compile Include="Data\Query.cs" />
-    <Compile Include="Data\Common\ReturnsId.cs" />
+    <Compile Include="Data\Common\Enums.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\FormHelper.cs" />

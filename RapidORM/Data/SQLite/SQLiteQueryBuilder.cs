@@ -18,7 +18,7 @@ namespace RapidORM.Data.SQLite
         public DataTable GetDataUsingDataAdapter(string sql, DbParameter[] queryParameter = null, CommandType commandType = CommandType.Text)
         {
             DataTable dataTable = null;
-            using (SQLiteConnection connection = new SQLiteConnection(DBContext.GetSQLiteConnection()))
+            using (SQLiteConnection connection = new SQLiteConnection(DBConnection.GetConnectionString(DatabaseType.SQLite)))
             {
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(sql, connection);
@@ -49,7 +49,7 @@ namespace RapidORM.Data.SQLite
         {
             try
             {
-                SQLiteConnection connection = new SQLiteConnection(DBContext.GetSQLiteConnection());
+                SQLiteConnection connection = new SQLiteConnection(DBConnection.GetConnectionString(DatabaseType.SQLite));
 
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(sql, connection);
@@ -77,7 +77,7 @@ namespace RapidORM.Data.SQLite
             object result = null;
             try
             {
-                using (SQLiteConnection connection = new SQLiteConnection(DBContext.GetSQLiteConnection()))
+                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.GetConnectionString(DatabaseType.SQLite)))
                 {
                     connection.Open();
                     SQLiteCommand command = new SQLiteCommand(sql, connection);
@@ -99,7 +99,7 @@ namespace RapidORM.Data.SQLite
             int result = 0;
             try
             {
-                using (SQLiteConnection connection = new SQLiteConnection(DBContext.GetSQLiteConnection()))
+                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.GetConnectionString(DatabaseType.SQLite)))
                 {
                     connection.Open();
                     SQLiteCommand command = new SQLiteCommand(sql, connection);

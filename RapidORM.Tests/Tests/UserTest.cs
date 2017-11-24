@@ -18,7 +18,7 @@ namespace RapidORM.Tests.Tests
 
         public UserTest()
         {
-            Database.UseDb(DBType.SQL);
+            Database.UseDb(DatabaseType.SQL);
             systemUser = new SystemUser();
         }
 

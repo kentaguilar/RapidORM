@@ -8,43 +8,36 @@ using System.Data;
 using System.Reflection;
 using RapidORM.Data;
 using RapidORM.Data.Common;
-using RapidORM.Helpers;
 
 namespace RapidORM.Data.SQLite
 {
     public class SQLiteTransaction<T> : Query<T>
     {
-        protected void MakeNewDatabase(string databaseName)
-        {
-            SQLiteConnection.CreateFile(string.Format("{0}.sqlite", databaseName));
-        }
-
         protected void ExecuteNonQuery(string sql)
         {
-            using (var conn = new SQLiteConnection(DBContext.GetSQLiteConnection()))
+            using (var connection = new SQLiteConnection(DBConnection.GetConnectionString(DatabaseType.SQLite)))
             {
                 try
                 {
-                    LogHelper.Log(sql);
-                    var command = new SQLiteCommand(sql, conn);
-                    conn.Open();
+                    var command = new SQLiteCommand(sql, connection);
+                    connection.Open();
                     command.ExecuteNonQuery();
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
 
         protected void ExecuteNonQuery(ImageParameterQueryContainer imageParameterQueryContainer)
         {
-            using (var conn = new SQLiteConnection(DBContext.GetSQLiteConnection()))
+            using (var connection = new SQLiteConnection(DBConnection.GetConnectionString(DatabaseType.SQLite)))
             {
                 try
                 {
-                    var command = new SQLiteCommand(imageParameterQueryContainer.SqlQuery, conn);
-                    conn.Open();
+                    var command = new SQLiteCommand(imageParameterQueryContainer.SqlQuery, connection);
+                    connection.Open();
 
                     foreach (var imageParameter in imageParameterQueryContainer.ImageParameterList)
                     {
@@ -55,26 +48,26 @@ namespace RapidORM.Data.SQLite
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
 
         protected object ExecuteScalar(string sql)
         {
-            using (var conn = new SQLiteConnection(DBContext.GetSQLiteConnection()))
+            using (var connection = new SQLiteConnection(DBConnection.GetConnectionString(DatabaseType.SQLite)))
             {
                 try
                 {
-                    var cmd = new SQLiteCommand(string.Format("{0} SELECT LAST_INSERT_ID();", sql), conn);
-                    conn.Open();
-                    object result = cmd.ExecuteScalar();
+                    var command = new SQLiteCommand(string.Format("{0};select last_insert_rowid();", sql), connection);
+                    connection.Open();
+                    object result = command.ExecuteScalar();
 
                     return result;
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
@@ -85,10 +78,10 @@ namespace RapidORM.Data.SQLite
             string uniqueField = GetPrimaryKey().Name;
 
             PropertyInfo piUnique = typeof(T).GetProperty(uniqueField);
-            string strSQL = "select " + uniqueField + " from " + table + " where ";
-            strSQL += uniqueField + "=" + FormatRawSqlQuery(piUnique.GetValue(o, null).ToString(), piUnique);
+            string query = "select " + uniqueField + " from " + table + " where ";
+            query += uniqueField + "=" + FormatRawSqlQuery(piUnique.GetValue(o, null).ToString(), piUnique, SpecialCharacter.No);
 
-            string strReadBack = GetSingleValue(strSQL, uniqueField);
+            string strReadBack = GetSingleValue(query, uniqueField);
             if (string.IsNullOrEmpty(strReadBack))
             {
                 return false;
@@ -99,22 +92,22 @@ namespace RapidORM.Data.SQLite
 
         protected void DeleteObject(T o, PropertyInfo field)
         {
-            string strSql = "delete from " + GetTableName() + " where ";
-            strSql += GetColumnName(field) + " = " + FormatRawSqlQuery(field.GetValue(o, null).ToString(), field);
+            string query = "delete from " + GetTableName() + " where ";
+            query += GetColumnName(field) + " = " + FormatRawSqlQuery(field.GetValue(o, null).ToString(), field, SpecialCharacter.No);
 
-            ExecuteNonQuery(strSql);
+            ExecuteNonQuery(query);
         }
 
         protected string GetSingleValue(string sql, string field)
         {
-            using (var conn = new SQLiteConnection(DBContext.GetSQLiteConnection()))
+            using (var connection = new SQLiteConnection(DBConnection.GetConnectionString(DatabaseType.SQLite)))
             {
                 try
                 {
                     string returnVal = null;
-                    SQLiteCommand database = new SQLiteCommand(sql, conn);
-                    conn.Open();
-                    SQLiteDataReader reader = database.ExecuteReader();
+                    SQLiteCommand command = new SQLiteCommand(sql, connection);
+                    connection.Open();
+                    SQLiteDataReader reader = command.ExecuteReader();
 
                     if (reader.Read())
                     {
@@ -125,17 +118,17 @@ namespace RapidORM.Data.SQLite
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
 
         protected SQLiteDataReader GetSQLiteDataReader(string sql)
         {
-            var connection = new SQLiteConnection(DBContext.GetSQLiteConnection());
+            var connection = new SQLiteConnection(DBConnection.GetConnectionString(DatabaseType.SQLite));
             connection.Open();
-            SQLiteCommand database = new SQLiteCommand(sql, connection);
-            SQLiteDataReader reader = database.ExecuteReader(CommandBehavior.CloseConnection);
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
+            SQLiteDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 
             return reader;
         }
@@ -144,10 +137,10 @@ namespace RapidORM.Data.SQLite
         {
             string table = GetTableName();
 
-            string strSQL = "select * from " + table + " where ";
-            strSQL += GetColumnName(field) + "=" + FormatRawSqlQuery(criteria, field);
-
-            return GetValues(strSQL);
+            string query = "select * from " + table + " where ";
+            query += GetColumnName(field) + "=" + FormatRawSqlQuery(criteria, field, SpecialCharacter.No);
+            
+            return GetValues(query);
         }
 
         public List<T> GetValues(string sql)

@@ -18,7 +18,7 @@ namespace RapidORM.Tests.Tests
 
         public DepartmentTest()
         {
-            Database.UseDb(DBType.MySql);
+            Database.UseDb(DatabaseType.MySql);
             department = new Department();
         }
 

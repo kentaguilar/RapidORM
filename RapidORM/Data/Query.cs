@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using RapidORM.Data.Common;
+using RapidORM.Helpers;
 
 namespace RapidORM.Data
 {
@@ -36,7 +37,7 @@ namespace RapidORM.Data
             return sqlQuery;
         }
 
-        protected string CreateInsertQuery(T o)
+        protected string CreateInsertQuery(T o, SpecialCharacter specialCharacter = SpecialCharacter.Yes)
         {
             PropertyInfo[] fields = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
@@ -63,7 +64,7 @@ namespace RapidORM.Data
                 }
 
                 string strValue = field.GetValue(o, null).ToString();
-                sqlQuery += separator + FormatRawSqlQuery(strValue, field);
+                sqlQuery += separator + FormatRawSqlQuery(strValue, field, specialCharacter);
                 separator = ",";
             }
 
@@ -198,30 +199,30 @@ namespace RapidORM.Data
             };
         }
 
-        protected string FormatRawSqlQuery(string value, PropertyInfo field)
-        {
-            string rawQuery = string.Empty;
+        protected string FormatRawSqlQuery(string value, PropertyInfo field, SpecialCharacter specialCharacter = SpecialCharacter.Yes)
+        {            ;
+            string query = string.Empty;
             if (IsConfirmedImage(field))
             {
-                rawQuery = string.Format("@{0}", GetColumnName(field));
+                query = string.Format("@{0}", GetColumnName(field));
             }
             else
             {
                 if (IsStringType(field))
                 {
-                    rawQuery = "N'" + value.Replace("'", "\"") + "'";
+                    query = (specialCharacter == SpecialCharacter.Yes ? "N" : string.Empty) + ("'" + value.Replace("'", "\"") + "'");                    
                 }
                 else if (IsDecimalType(field))
                 {
-                    rawQuery = value.Replace(",", ".");
+                    query = value.Replace(",", ".");
                 }
                 else
                 {
-                    rawQuery = value;
+                    query = value;
                 }
             }
 
-            return rawQuery;
+            return query;
         }
     }
 }

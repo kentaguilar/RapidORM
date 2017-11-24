@@ -15,29 +15,29 @@ namespace RapidORM.Data.MySQL
     {
         protected void ExecuteNonQuery(string sql)
         {
-            using (var conn = new MySqlConnection(DBContext.GetMySqlConnection()))
+            using (var connection = new MySqlConnection(DBConnection.GetConnectionString(DatabaseType.MySql)))
             {
                 try
                 {
-                    var command = new MySqlCommand(sql, conn);
-                    conn.Open();
+                    var command = new MySqlCommand(sql, connection);
+                    connection.Open();
                     command.ExecuteNonQuery();
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
 
         protected void ExecuteNonQuery(ImageParameterQueryContainer imageParameterQueryContainer)
         {
-            using (var conn = new MySqlConnection(DBContext.GetMySqlConnection()))
+            using (var connection = new MySqlConnection(DBConnection.GetConnectionString(DatabaseType.MySql)))
             {
                 try
                 {
-                    var command = new MySqlCommand(imageParameterQueryContainer.SqlQuery, conn);
-                    conn.Open();
+                    var command = new MySqlCommand(imageParameterQueryContainer.SqlQuery, connection);
+                    connection.Open();
 
                     foreach (var imageParameter in imageParameterQueryContainer.ImageParameterList)
                     {
@@ -48,7 +48,7 @@ namespace RapidORM.Data.MySQL
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
@@ -60,19 +60,19 @@ namespace RapidORM.Data.MySQL
 
         protected object ExecuteScalar(string sql)
         {
-            using (var conn = new MySqlConnection(DBContext.GetMySqlConnection()))
+            using (var connection = new MySqlConnection(DBConnection.GetConnectionString(DatabaseType.MySql)))
             {
                 try
                 {
-                    var cmd = new MySqlCommand(string.Format("{0} SELECT LAST_INSERT_ID();", sql), conn);
-                    conn.Open();
-                    object result = cmd.ExecuteScalar();
+                    var command = new MySqlCommand(string.Format("{0} SELECT LAST_INSERT_ID();", sql), connection);
+                    connection.Open();
+                    object result = command.ExecuteScalar();
 
                     return result;
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
@@ -83,10 +83,10 @@ namespace RapidORM.Data.MySQL
             string uniqueField = GetPrimaryKey().Name;
 
             PropertyInfo piUnique = typeof(T).GetProperty(uniqueField);
-            string strSQL = "select " + uniqueField + " from " + table + " where ";
-            strSQL += uniqueField + "=" + FormatRawSqlQuery(piUnique.GetValue(o, null).ToString(), piUnique);
+            string query = "select " + uniqueField + " from " + table + " where ";
+            query += uniqueField + "=" + FormatRawSqlQuery(piUnique.GetValue(o, null).ToString(), piUnique);
 
-            string strReadBack = GetSingleValue(strSQL, uniqueField);
+            string strReadBack = GetSingleValue(query, uniqueField);
             if (string.IsNullOrEmpty(strReadBack))
             {
                 return false;
@@ -97,22 +97,22 @@ namespace RapidORM.Data.MySQL
 
         protected void DeleteObject(T o, PropertyInfo field)
         {
-            string strSql = "delete from " + GetTableName() + " where ";
-            strSql += GetColumnName(field) + " = " + FormatRawSqlQuery(field.GetValue(o, null).ToString(), field);
+            string query = "delete from " + GetTableName() + " where ";
+            query += GetColumnName(field) + " = " + FormatRawSqlQuery(field.GetValue(o, null).ToString(), field);
 
-            ExecuteNonQuery(strSql);
+            ExecuteNonQuery(query);
         }
 
         protected string GetSingleValue(string sql, string field)
         {
-            using (var conn = new MySqlConnection(DBContext.GetMySqlConnection()))
+            using (var connection = new MySqlConnection(DBConnection.GetConnectionString(DatabaseType.MySql)))
             {
                 try
                 {
                     string returnVal = null;
-                    MySqlCommand database = new MySqlCommand(sql, conn);
-                    conn.Open();
-                    MySqlDataReader reader = database.ExecuteReader();
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    connection.Open();
+                    MySqlDataReader reader = command.ExecuteReader();
 
                     if (reader.Read())
                     {
@@ -123,17 +123,17 @@ namespace RapidORM.Data.MySQL
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
 
         protected MySqlDataReader GetMySqlDataReader(string sql)
         {
-            var connection = new MySqlConnection(DBContext.GetMySqlConnection());
+            var connection = new MySqlConnection(DBConnection.GetConnectionString(DatabaseType.MySql));
             connection.Open();
-            MySqlCommand database = new MySqlCommand(sql, connection);
-            MySqlDataReader reader = database.ExecuteReader(CommandBehavior.CloseConnection);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            MySqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 
             return reader;
         }
@@ -142,10 +142,10 @@ namespace RapidORM.Data.MySQL
         {
             string table = GetTableName();
             
-            string strSQL = "select * from " + table + " where ";
-            strSQL += GetColumnName(field) + "=" + FormatRawSqlQuery(criteria, field);
+            string query = "select * from " + table + " where ";
+            query += GetColumnName(field) + "=" + FormatRawSqlQuery(criteria, field);
 
-            return GetValues(strSQL);
+            return GetValues(query);
         }
 
         public List<T> GetValues(string sql)

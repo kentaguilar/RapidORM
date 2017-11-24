@@ -62,7 +62,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Core\Database.cs" />
-    <Compile Include="Core\DBType.cs" />
     <Compile Include="CustomQueries\MySqlQueryBuilderTest.cs" />
     <Compile Include="CustomQueries\SqlQueryBuilderTest.cs" />
     <Compile Include="CustomQueries\SQLiteQueryBuilderTest.cs" />
@@ -81,9 +80,7 @@
       <Name>RapidORM</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DatabaseStructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

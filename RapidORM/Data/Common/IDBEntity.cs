@@ -9,12 +9,6 @@ namespace RapidORM.Data.Common
     public interface IDBEntity<T>
     {
         /// <summary>
-        /// Routine to create database
-        /// </summary>
-        /// <param name="o"></param>
-        void CreateDatabase(string databaseName);
-
-        /// <summary>
         /// All-in-one saving of changes. 
         /// It automatically detects if object provided will be used for insert or update
         /// </summary>

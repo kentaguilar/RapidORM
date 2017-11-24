@@ -11,4 +11,17 @@ namespace RapidORM.Data.Common
         Yes,
         No
     }
+
+    public enum SpecialCharacter
+    { 
+        Yes,
+        No
+    }
+
+    public enum DatabaseType
+    {
+        SQL,
+        MySql,
+        SQLite
+    }
 }

@@ -71,7 +71,7 @@ namespace RapidORM.Data
         }
 
         protected PropertyInfo GetField(string name)
-        {
+        {            
             PropertyInfo field = typeof(T).GetProperty(name);
 
             return (PropertyInfo)field;

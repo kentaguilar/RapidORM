@@ -1,2 +1,4 @@
 /RapidORM/bin/
 /RapidORM/obj/
+/RapidORM.Tests/bin/
+/RapidORM.Tests/obj/

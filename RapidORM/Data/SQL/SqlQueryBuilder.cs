@@ -18,7 +18,7 @@ namespace RapidORM.Data.SQL
         public DataTable GetDataUsingDataAdapter(string sql, DbParameter[] queryParameter = null, CommandType commandType = CommandType.Text)
         {
             DataTable dataTable = null;
-            using (SqlConnection connection = new SqlConnection(DBContext.GetSqlConnection()))
+            using (SqlConnection connection = new SqlConnection(DBConnection.GetConnectionString(DatabaseType.SQL)))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(sql, connection);
@@ -49,7 +49,7 @@ namespace RapidORM.Data.SQL
         {
             try
             {
-                SqlConnection connection = new SqlConnection(DBContext.GetSqlConnection());
+                SqlConnection connection = new SqlConnection(DBConnection.GetConnectionString(DatabaseType.SQL));
 
                 connection.Open();
                 SqlCommand command = new SqlCommand(sql, connection);
@@ -77,7 +77,7 @@ namespace RapidORM.Data.SQL
             object result = null;
             try
             {
-                using (SqlConnection connection = new SqlConnection(DBContext.GetSqlConnection()))
+                using (SqlConnection connection = new SqlConnection(DBConnection.GetConnectionString(DatabaseType.SQL)))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(sql, connection);
@@ -99,7 +99,7 @@ namespace RapidORM.Data.SQL
             int result = 0;
             try
             {
-                using (SqlConnection connection = new SqlConnection(DBContext.GetSqlConnection()))
+                using (SqlConnection connection = new SqlConnection(DBConnection.GetConnectionString(DatabaseType.SQL)))
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand(sql, connection);

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using RapidORM.Data;
 using RapidORM.Data.Common;
+using RapidORM.Helpers;
 
 namespace RapidORM.Data.SQLite
 {
@@ -16,11 +17,6 @@ namespace RapidORM.Data.SQLite
         public SQLiteEntity()
         {
             tableName = GetTableName();
-        }
-
-        public void CreateDatabase(string databaseName)
-        {
-            MakeNewDatabase(databaseName);
         }
 
         #region Save Changes
@@ -80,7 +76,7 @@ namespace RapidORM.Data.SQLite
         {
             try
             {
-                return Convert.ToInt32(ExecuteScalar(CreateInsertQuery(o)));
+                return Convert.ToInt32(ExecuteScalar(CreateInsertQuery(o, SpecialCharacter.No)));
             }
             catch (Exception ex)
             {
@@ -92,7 +88,7 @@ namespace RapidORM.Data.SQLite
         {
             try
             {
-                ExecuteNonQuery(CreateInsertQuery(o));
+                ExecuteNonQuery(CreateInsertQuery(o, SpecialCharacter.No));
             }
             catch (Exception ex)
             {
@@ -181,7 +177,7 @@ namespace RapidORM.Data.SQLite
             foreach (var searchCriteria in searchCriteriaList)
             {
                 field = GetField(searchCriteria.Column);
-                strSQL += GetColumnName(field) + "=" + FormatRawSqlQuery(searchCriteria.Value, field) + " and ";
+                strSQL += GetColumnName(field) + "=" + FormatRawSqlQuery(searchCriteria.Value, field, SpecialCharacter.No) + " and ";
             }
 
             strSQL = strSQL.Remove(strSQL.Length - 5);

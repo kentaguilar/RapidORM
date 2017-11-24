@@ -4,24 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RapidORM.Data;
+using RapidORM.Data.Common;
 
 namespace RapidORM.Tests.Core
 {
     public class Database
     {
-        public static void UseDb(DBType dbType)
+        public static void UseDb(DatabaseType dbType)
         {
             switch (dbType)
             {
-                case DBType.MySql: ConnectToDb(); break;
-                case DBType.SQLite: ConnectToSQLite(); break;
+                case DatabaseType.MySql: ConnectToDb(); break;
+                case DatabaseType.SQLite: ConnectToSQLite(); break;
                 default: ConnectToDb(); break;
             }
         }
 
         private static void ConnectToDb()
         {
-            DBContext.ConnectionString = new DBConnection()
+            DBConnection.ConnectionString = new DBConnectionSetting()
             {
                 Server = "localhost",
                 Database = "rapidorm",
@@ -32,7 +33,7 @@ namespace RapidORM.Tests.Core
 
         private static void ConnectToSQLite()
         {
-            DBContext.ConnectionString = new DBConnection() 
+            DBConnection.ConnectionString = new DBConnectionSetting() 
             { 
                 Database = "rapidorm.sqlite"
             };

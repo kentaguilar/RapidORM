@@ -167,10 +167,5 @@ namespace RapidORM.Data.SQL
             throw new NotImplementedException();
         }
         #endregion
-
-        public void CreateDatabase(string databaseName)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

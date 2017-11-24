@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
 using RapidORM.Data;
+using RapidORM.Data.Common;
 
 namespace RapidORM.Data.SQL
 {
@@ -14,36 +15,36 @@ namespace RapidORM.Data.SQL
     {
         protected void ExecuteNonQuery(string sql)
         {
-            using (var conn = new SqlConnection(DBContext.GetSqlConnection()))
+            using (var connection = new SqlConnection(DBConnection.GetConnectionString(DatabaseType.SQL)))
             {
                 try
                 {
-                    var cmd = new SqlCommand(sql, conn);
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
+                    var command = new SqlCommand(sql, connection);
+                    connection.Open();
+                    command.ExecuteNonQuery();
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
 
         protected int ExecuteScalar(string sql)
         {
-            using (var conn = new SqlConnection(DBContext.GetSqlConnection()))
+            using (var connection = new SqlConnection(DBConnection.GetConnectionString(DatabaseType.SQL)))
             {
                 try
                 {
-                    var cmd = new SqlCommand(string.Format("{0} SELECT SCOPE_IDENTITY()", sql), conn);
-                    conn.Open();
-                    int result = (int)(decimal)cmd.ExecuteScalar();
+                    var command = new SqlCommand(string.Format("{0} SELECT SCOPE_IDENTITY()", sql), connection);
+                    connection.Open();
+                    int result = (int)(decimal)command.ExecuteScalar();
 
                     return result;
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
@@ -54,10 +55,10 @@ namespace RapidORM.Data.SQL
             string uniqueField = GetPrimaryKey().Name;
 
             PropertyInfo piUnique = typeof(T).GetProperty(uniqueField);
-            string strSQL = "select " + uniqueField + " from " + table + " where ";
-            strSQL += uniqueField + "=" + FormatRawSqlQuery(piUnique.GetValue(o, null).ToString(), piUnique);
+            string query = "select " + uniqueField + " from " + table + " where ";
+            query += uniqueField + "=" + FormatRawSqlQuery(piUnique.GetValue(o, null).ToString(), piUnique);
 
-            string strReadBack = GetSingleValue(strSQL, uniqueField);
+            string strReadBack = GetSingleValue(query, uniqueField);
             if (string.IsNullOrEmpty(strReadBack))
             {
                 return false;
@@ -68,22 +69,22 @@ namespace RapidORM.Data.SQL
 
         protected void DeleteObject(T o, PropertyInfo field)
         {
-            string strSql = "delete from " + GetTableName() + " where ";
-            strSql += GetColumnName(field) + " = " + FormatRawSqlQuery(field.GetValue(o, null).ToString(), field);
+            string query = "delete from " + GetTableName() + " where ";
+            query += GetColumnName(field) + " = " + FormatRawSqlQuery(field.GetValue(o, null).ToString(), field);
 
-            ExecuteNonQuery(strSql);
+            ExecuteNonQuery(query);
         }
 
         protected string GetSingleValue(string sql, string field)
         {
-            using (var conn = new SqlConnection(DBContext.GetSqlConnection()))
+            using (var connection = new SqlConnection(DBConnection.GetConnectionString(DatabaseType.SQL)))
             {
                 try
                 {
                     string returnVal = null;
-                    SqlCommand database = new SqlCommand(sql, conn);
-                    conn.Open();
-                    SqlDataReader reader = database.ExecuteReader();
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
                     if (reader.Read())
                     {
@@ -94,17 +95,17 @@ namespace RapidORM.Data.SQL
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
             }
         }
 
         protected SqlDataReader GetSqlDataReader(string sql)
         {
-            var connection = new SqlConnection(DBContext.GetSqlConnection());
+            var connection = new SqlConnection(DBConnection.GetConnectionString(DatabaseType.SQL));
             connection.Open();
-            SqlCommand database = new SqlCommand(sql, connection);
-            SqlDataReader reader = database.ExecuteReader(CommandBehavior.CloseConnection);
+            SqlCommand command = new SqlCommand(sql, connection);
+            SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 
             return reader;
         }
@@ -113,10 +114,10 @@ namespace RapidORM.Data.SQL
         {
             string table = GetTableName();
             
-            string strSQL = "select * from " + table + " where ";
-            strSQL += GetColumnName(field) + "=" + FormatRawSqlQuery(criteria, field);
+            string query = "select * from " + table + " where ";
+            query += GetColumnName(field) + "=" + FormatRawSqlQuery(criteria, field);
 
-            return GetValues(strSQL);
+            return GetValues(query);
         }
 
         protected List<T> GetValues(string sql)

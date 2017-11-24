@@ -18,7 +18,7 @@ namespace RapidORM.Data.MySQL
         public DataTable GetDataUsingDataAdapter(string sql, DbParameter[] queryParameter = null, CommandType commandType = CommandType.Text)
         {
             DataTable dataTable = null;
-            using (MySqlConnection connection = new MySqlConnection(DBContext.GetMySqlConnection()))
+            using (MySqlConnection connection = new MySqlConnection(DBConnection.GetConnectionString(DatabaseType.MySql)))
             {
                 connection.Open();
                 MySqlCommand command = new MySqlCommand(sql, connection);
@@ -49,7 +49,7 @@ namespace RapidORM.Data.MySQL
         {
             try
             {
-                MySqlConnection connection = new MySqlConnection(DBContext.GetMySqlConnection());
+                MySqlConnection connection = new MySqlConnection(DBConnection.GetConnectionString(DatabaseType.MySql));
 
                 connection.Open();
                 MySqlCommand command = new MySqlCommand(sql, connection);
@@ -77,7 +77,7 @@ namespace RapidORM.Data.MySQL
             object result = null;
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(DBContext.GetMySqlConnection()))
+                using (MySqlConnection connection = new MySqlConnection(DBConnection.GetConnectionString(DatabaseType.MySql)))
                 {
                     connection.Open();
                     MySqlCommand command = new MySqlCommand(sql, connection);
@@ -99,7 +99,7 @@ namespace RapidORM.Data.MySQL
             int result = 0;
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(DBContext.GetMySqlConnection()))
+                using (MySqlConnection connection = new MySqlConnection(DBConnection.GetConnectionString(DatabaseType.MySql)))
                 {
                     connection.Open();
                     MySqlCommand command = new MySqlCommand(sql, connection);

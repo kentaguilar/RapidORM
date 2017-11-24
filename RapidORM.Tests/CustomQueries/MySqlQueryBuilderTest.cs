@@ -19,7 +19,7 @@ namespace RapidORM.Tests.CustomQueries
 
         public MySqlQueryBuilderTest()
         {
-            Database.UseDb(DBType.MySql);
+            Database.UseDb(DatabaseType.MySql);
             queryBuilder = new MySqlQueryBuilder();
         }
 
@@ -28,8 +28,8 @@ namespace RapidORM.Tests.CustomQueries
         {
             string sql = "insert into department(name,date_created) VALUES(@name,@datecreated)";
             queryBuilder.ExecuteNonQuery(sql, new[]{
-                new MySqlParameter{ ParameterName="name", Value = "Accounting" },
-                new MySqlParameter{ ParameterName="datecreated", Value = DateHelper.GetDateTimeForDB() },                
+                new MySqlParameter{ ParameterName = "name", Value = "Accounting" },
+                new MySqlParameter{ ParameterName = "datecreated", Value = DateHelper.GetDateTimeForDB() },                
             });
 
             Assert.Inconclusive("New Department Saved");
@@ -39,9 +39,9 @@ namespace RapidORM.Tests.CustomQueries
         public void QueryBuilderMySqlExecuteScalarTest()
         {
             string sql = "select * from department";
-            var systemUsers = queryBuilder.ExecuteScalar(sql);
+            var departments = queryBuilder.ExecuteScalar(sql);
 
-            Assert.AreEqual(5, systemUsers);
+            Assert.AreEqual(5, departments);
         }
 
         [TestMethod]
