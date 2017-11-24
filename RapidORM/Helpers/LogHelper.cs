@@ -9,6 +9,10 @@ namespace RapidORM.Helpers
 {
     public static class LogHelper
     {
+        /// <summary>
+        /// Logs anything to your apps log folder
+        /// </summary>
+        /// <param name="content"></param>
         public static void Log(string content)
         {
             string directory = @"logs\";
