@@ -72,6 +72,7 @@
     <Compile Include="Tests\DepartmentTest.cs" />
     <Compile Include="Tests\Helpers\NetworkHelperTest.cs" />
     <Compile Include="Tests\EmployeeTest.cs" />
+    <Compile Include="Tests\Helpers\DateTimeHelperTest.cs" />
     <Compile Include="Tests\UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
