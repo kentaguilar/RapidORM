@@ -23,7 +23,7 @@ namespace RapidORM.Tests.Models.SQLite
         [ColumnName("position")]
         public string Position { get; set; }
 
-        private IDBEntity<Employee> dbContext = null;
+        private SQLiteEntity<Employee> dbContext = null;
 
         public Employee()
         {
@@ -41,6 +41,11 @@ namespace RapidORM.Tests.Models.SQLite
         public void Save(Employee employee)
         {
             dbContext.SaveChanges(employee);
+        }
+
+        public void InsertWithoutPrimaryKey(Employee employee)
+        {
+            dbContext.InsertObjectWithoutPrimaryKey(employee);
         }
 
         public int InsertEmployeeAndReturnAnId(Employee employee)

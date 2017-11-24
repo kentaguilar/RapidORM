@@ -26,15 +26,28 @@ namespace RapidORM.Tests.Tests
         {
             employee.Save(new Employee
             {
-                Name = "Leona DAvidson",
-                Position = "Supervisor"
+                Name = "Anna Diaz",
+                Position = "Line Supervisor"
             });
 
             Assert.Inconclusive("New Employee Saved");
         }
 
         [TestMethod]
-        public void InsertUserAndReturnAnIdTest()
+        public void InsertEmployeeWithoutPrimaryKeyTest()
+        {
+            employee.InsertWithoutPrimaryKey(new Employee
+            {
+                Id = 5,
+                Name = "Kyle Pearson",
+                Position = "Network Administrator"
+            });
+
+            Assert.Inconclusive("New Employee Saved");
+        }
+
+        [TestMethod]
+        public void InsertEmployeeAndReturnAnIdTest()
         {
             int savedId = employee.InsertEmployeeAndReturnAnId(new Employee
             {

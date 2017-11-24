@@ -100,7 +100,7 @@ namespace RapidORM.Data.SQLite
         {
             try
             {
-                ExecuteNonQuery(CreateInsertQueryWithoutPrimaryKey(o));
+                ExecuteNonQuery(CreateInsertQueryWithoutPrimaryKey(o, SpecialCharacter.No));
             }
             catch (Exception ex)
             {

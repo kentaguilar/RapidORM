@@ -11,30 +11,32 @@ namespace RapidORM.Data
 {
     public class Query<T> : Field<T>
     {        
-        protected string CreateInsertQueryWithoutPrimaryKey(T o)
+        protected string CreateInsertQueryWithoutPrimaryKey(T o, SpecialCharacter specialCharacter = SpecialCharacter.Yes)
         {
-            PropertyInfo[] fields = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo[] fields = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);            
 
-            string sqlQuery = "insert into " + GetTableName() + " (";
+            string query = "insert into " + GetTableName() + " (";
             string separator = "";
             foreach (PropertyInfo field in fields)
             {
-                sqlQuery += separator + GetColumnName(field);
+                query += separator + GetColumnName(field);
                 separator = ",";
             }
 
-            sqlQuery += ") values (";
+            query += ") values (";
             separator = "";
             foreach (PropertyInfo field in fields)
             {
                 string strValue = field.GetValue(o, null).ToString();
-                sqlQuery += separator + FormatRawSqlQuery(strValue, field);
+                query += separator + FormatRawSqlQuery(strValue, field, specialCharacter);
                 separator = ",";
             }
 
-            sqlQuery += ");";
+            query += ");";
 
-            return sqlQuery;
+            LogHelper.Log(query);
+
+            return query;
         }
 
         protected string CreateInsertQuery(T o, SpecialCharacter specialCharacter = SpecialCharacter.Yes)
