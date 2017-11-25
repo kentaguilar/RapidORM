@@ -24,26 +24,5 @@ namespace RapidORM.Helpers
 
             return body.Member.Name;
         }
-
-        public static void GetProperties<T>(Expression<Action<T>> expression)
-        {
-            var body = expression.Body as MethodCallExpression;
-
-            if (body == null)
-            {
-                throw new ArgumentException("You must pass a lambda of the form: '() => Class.Property' or '() => object.Property'");
-            }
-            else
-            {
-                foreach (var argument in body.Arguments)
-                {
-                    var constant = argument as ConstantExpression;
-                    if (constant != null)
-                    {
-                        Console.WriteLine(constant.Value);
-                    }
-                }
-            }
-        }
     }
 }

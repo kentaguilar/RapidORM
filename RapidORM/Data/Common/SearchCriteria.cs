@@ -19,18 +19,4 @@ namespace RapidORM.Data.Common
         public object Column { get; set; }
         public string Value { get; set; }
     }
-
-    public static class MyExtensionMethods
-    {
-        public static bool IsNumeric(this string s)
-        {
-            float output;
-            return float.TryParse(s, out output);
-        }
-
-        public static string ToPropertyName(this DateTime dt)
-        {            
-            return PropertyHelper.GetPropertyName(() => dt);
-        }
-    }
 }
