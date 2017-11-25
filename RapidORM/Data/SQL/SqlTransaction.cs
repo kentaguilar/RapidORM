@@ -120,22 +120,23 @@ namespace RapidORM.Data.SQL
             return GetValues(query);
         }
 
-        protected List<T> GetValues(string sql)
+        public List<T> GetValues(string query)
         {
             var values = new List<T>();
-            PropertyInfo[] fields = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            SqlDataReader reader = GetSqlDataReader(sql);
+            object instance = null;
+
+            PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var reader = GetSqlDataReader(query);
+
             while (reader.Read())
             {
-                var args = new Dictionary<string, object>();
-                string fieldName = string.Empty;
-                for (int i = 0; i < fields.Length; i++)
+                instance = Activator.CreateInstance(typeof(T));
+                foreach (var property in properties)
                 {
-                    fieldName = GetColumnName(fields[i]);
-                    args.Add(fieldName, reader[fieldName]);
+                    property.SetValue(instance, reader[GetColumnName(property)]);
                 }
 
-                values.Add((T)Activator.CreateInstance(typeof(T), args));
+                values.Add((T)instance);
             }
 
             reader.Close();

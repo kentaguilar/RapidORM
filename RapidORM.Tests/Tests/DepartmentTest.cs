@@ -28,7 +28,7 @@ namespace RapidORM.Tests.Tests
             department.Save(new Department 
             { 
                 Name = "Finance",
-                DateCreated = DateHelper.GetDateTimeForDB()
+                DateCreated = DateTime.Now
             });
 
             Assert.Inconclusive("New Department Saved");
@@ -40,7 +40,7 @@ namespace RapidORM.Tests.Tests
             int savedId = department.InsertDepartmentAndReturnAnId(new Department 
             { 
                 Name = "Production",
-                DateCreated = DateHelper.GetDateTimeForDB()
+                DateCreated = DateTime.Now
             });
 
             Assert.AreEqual(1, savedId);

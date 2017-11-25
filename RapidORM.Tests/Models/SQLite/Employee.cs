@@ -23,41 +23,29 @@ namespace RapidORM.Tests.Models.SQLite
         [ColumnName("position")]
         public string Position { get; set; }
 
-        private SQLiteEntity<Employee> dbContext = null;
-
-        public Employee()
-        {
-            dbContext = new SQLiteEntity<Employee>();
-        }
-
-        public Employee(Dictionary<string, object> args)
-        {
-            Id = Convert.ToInt32(args["id"].ToString());
-            Name = args["name"].ToString();
-            Position = args["position"].ToString();
-        }
+        private IDBEntity<Employee> entity = new SQLiteEntity<Employee>();
 
         #region Class Methods
         public void Save(Employee employee)
         {
-            dbContext.SaveChanges(employee);
+            entity.SaveChanges(employee);
         }
 
         public void InsertWithoutPrimaryKey(Employee employee)
         {
-            dbContext.InsertObjectWithoutPrimaryKey(employee);
+            entity.InsertObjectWithoutPrimaryKey(employee);
         }
 
         public int InsertEmployeeAndReturnAnId(Employee employee)
         {
-            int returnedId = dbContext.InsertObjectAndReturnsId(employee);
+            int returnedId = entity.InsertObjectAndReturnsId(employee);
 
             return returnedId;
         }
 
         public void DeleteEmployeeByPropertyName(string fieldValue)
         {
-            dbContext.DeleteObject(new Employee
+            entity.DeleteObject(new Employee
             {
                 Name = fieldValue
             }, "Name");
@@ -65,19 +53,19 @@ namespace RapidORM.Tests.Models.SQLite
 
         public void DeleteEmployeeByObject(Employee employee)
         {
-            dbContext.DeleteObject(employee);
+            entity.DeleteObject(employee);
         }
 
         public IEnumerable<Employee> GetAllEmployees()
         {
-            IEnumerable<Employee> employees = dbContext.GetAllObjects();
+            IEnumerable<Employee> employees = entity.GetAllObjects();
 
             return (employees.Count() > 0) ? employees : null;
         }
 
         public IEnumerable<Employee> GetEmployeesByPosition(string position)
         {
-            var employees = dbContext.GetObjectsByCriteria(new SearchCriteria
+            var employees = entity.GetObjectsByCriteria(new SearchCriteria
             {
                 Column = PropertyHelper.GetPropertyName(() => this.Position),
                 Value = position
@@ -88,14 +76,14 @@ namespace RapidORM.Tests.Models.SQLite
 
         public IEnumerable<Employee> GetEmployeesByStringCriteria(int id)
         {
-            var employees = dbContext.GetObjectsByCriteria("Id", id.ToString());
+            var employees = entity.GetObjectsByCriteria("Id", id.ToString());
 
             return (employees.Count() > 0) ? employees : null;
         }
 
         public IEnumerable<Employee> GetEmployeesByMultipleCriteria(string name, string position)
         {
-            var employees = dbContext.GetObjectsByMultipleCriterias(new List<SearchCriteria> 
+            var employees = entity.GetObjectsByMultipleCriterias(new List<SearchCriteria> 
             { 
                 new SearchCriteria
                 {

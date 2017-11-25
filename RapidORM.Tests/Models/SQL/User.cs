@@ -30,38 +30,24 @@ namespace RapidORM.Tests.Models.SQL
         [ColumnName("DesignatedPosition")]
         public string DesignatedPosition { get; set; }
 
-        private SqlEntity<SystemUser> dbContext = null;
-
-        public SystemUser()
-        {
-            dbContext = new SqlEntity<SystemUser>();
-        }
-
-        public SystemUser(Dictionary<string, object> args)
-        {
-            Id = Convert.ToInt32(args["Id"].ToString());
-            Name = args["Name"].ToString();
-            Email = args["Email"].ToString();
-            Password = args["Password"].ToString();
-            DesignatedPosition = args["DesignatedPosition"].ToString();
-        }
+        private SqlEntity<SystemUser> entity = new SqlEntity<SystemUser>();
 
         #region Instance Methods
         public void Save(SystemUser user)
         {
-            dbContext.SaveChanges(user);            
+            entity.SaveChanges(user);            
         }
 
         public int InsertUserAndReturnAnId(SystemUser user)
         {
-            int returnedId = dbContext.InsertObjectAndReturnsId(user);
+            int returnedId = entity.InsertObjectAndReturnsId(user);
 
             return returnedId;
         }
 
         public void DeleteUserByPropertyName(string fieldValue)
         {
-            dbContext.DeleteObject(new SystemUser
+            entity.DeleteObject(new SystemUser
             {
                 Email = fieldValue
             }, "Email");
@@ -69,19 +55,19 @@ namespace RapidORM.Tests.Models.SQL
 
         public void DeleteUserByObject(SystemUser user)
         {
-            dbContext.DeleteObject(user);
+            entity.DeleteObject(user);
         }
 
         public IEnumerable<SystemUser> GetAllSystemUsers()
         {
-            IEnumerable<SystemUser> systemUsers = dbContext.GetAllObjects();
+            IEnumerable<SystemUser> systemUsers = entity.GetAllObjects();
 
             return (systemUsers.Count() > 0) ? systemUsers : null;
         }
 
         public IEnumerable<SystemUser> GetUserByDesignatedPosition(string designatedPosition)
         {
-            var systemUsers = dbContext.GetObjectsByCriteria(new SearchCriteria
+            var systemUsers = entity.GetObjectsByCriteria(new SearchCriteria
             {
                 Column = PropertyHelper.GetPropertyName(() => this.DesignatedPosition),
                 Value = designatedPosition
@@ -92,14 +78,14 @@ namespace RapidORM.Tests.Models.SQL
 
         public IEnumerable<SystemUser> GetUsersByStringCriteria(int id)
         {
-            var systemUsers = dbContext.GetObjectsByCriteria("Id", id.ToString());
+            var systemUsers = entity.GetObjectsByCriteria("Id", id.ToString());
 
             return (systemUsers.Count() > 0) ? systemUsers : null;
         }
 
         public IEnumerable<SystemUser> GetUsersByMultipleCriteria(string name, string designatedPosition)
         {
-            var systemUsers = dbContext.GetObjectsByMultipleCriterias(new List<SearchCriteria> 
+            var systemUsers = entity.GetObjectsByMultipleCriterias(new List<SearchCriteria> 
             { 
                 new SearchCriteria
                 {

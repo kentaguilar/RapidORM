@@ -15,14 +15,35 @@ namespace RapidORM.Helpers
         /// <param name="propertyLambda"></param>
         public static string GetPropertyName<T>(Expression<Func<T>> propertyLambda)
         {
-            var me = propertyLambda.Body as MemberExpression;
+            var body = propertyLambda.Body as MemberExpression;
 
-            if (me == null)
+            if (body == null)
             {
                 throw new ArgumentException("You must pass a lambda of the form: '() => Class.Property' or '() => object.Property'");
             }
 
-            return me.Member.Name;
+            return body.Member.Name;
+        }
+
+        public static void GetProperties<T>(Expression<Action<T>> expression)
+        {
+            var body = expression.Body as MethodCallExpression;
+
+            if (body == null)
+            {
+                throw new ArgumentException("You must pass a lambda of the form: '() => Class.Property' or '() => object.Property'");
+            }
+            else
+            {
+                foreach (var argument in body.Arguments)
+                {
+                    var constant = argument as ConstantExpression;
+                    if (constant != null)
+                    {
+                        Console.WriteLine(constant.Value);
+                    }
+                }
+            }
         }
     }
 }

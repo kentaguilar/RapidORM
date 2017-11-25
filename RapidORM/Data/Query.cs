@@ -202,7 +202,7 @@ namespace RapidORM.Data
         }
 
         protected string FormatRawSqlQuery(string value, PropertyInfo field, SpecialCharacter specialCharacter = SpecialCharacter.Yes)
-        {            ;
+        {            
             string query = string.Empty;
             if (IsConfirmedImage(field))
             {
@@ -218,12 +218,16 @@ namespace RapidORM.Data
                 {
                     query = value.Replace(",", ".");
                 }
+                else if (IsDateTimeType(field))
+                {
+                    query = string.Format("'{0}'", Convert.ToDateTime(value).ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                }
                 else
                 {
                     query = value;
                 }
             }
-
+            
             return query;
         }
     }

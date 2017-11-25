@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RapidORM.Data.Common
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class ColumnName : System.Attribute
+    public class ColumnName : Attribute
     {
         public string Name { get; set; }
 

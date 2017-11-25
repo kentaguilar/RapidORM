@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RapidORM.Data.Common
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class IsPrimaryKey : System.Attribute
+    public class IsPrimaryKey : Attribute
     {
         public bool IsIdentity { get; set; }
 

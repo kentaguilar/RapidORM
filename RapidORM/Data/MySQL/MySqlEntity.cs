@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Reflection;
 using RapidORM.Data;
 using RapidORM.Data.Common;
+using RapidORM.Helpers;
+using System.Linq.Expressions;
 
 namespace RapidORM.Data.MySQL
 {

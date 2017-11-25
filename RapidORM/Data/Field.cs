@@ -120,6 +120,16 @@ namespace RapidORM.Data
             return isStringType;
         }
 
+        protected bool IsDateTimeType(PropertyInfo field)
+        {
+            bool isStringType = false;
+            if (field.PropertyType == typeof(System.DateTime))
+            {
+                isStringType = true;
+            }
+            return isStringType;
+        }
+
         protected bool IsValidPath(string value)
         {
             bool isByteArrayType = false;
