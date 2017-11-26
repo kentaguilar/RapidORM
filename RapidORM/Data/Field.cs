@@ -120,14 +120,24 @@ namespace RapidORM.Data
             return isStringType;
         }
 
+        protected bool IsTimeSpanType(PropertyInfo field)
+        {
+            bool isTimeSpanType = false;
+            if (field.PropertyType == typeof(System.TimeSpan))
+            {
+                isTimeSpanType = true;
+            }
+            return isTimeSpanType;
+        }
+
         protected bool IsDateTimeType(PropertyInfo field)
         {
-            bool isStringType = false;
+            bool isDateTimeType = false;
             if (field.PropertyType == typeof(System.DateTime))
             {
-                isStringType = true;
+                isDateTimeType = true;
             }
-            return isStringType;
+            return isDateTimeType;
         }
 
         protected bool IsValidPath(string value)

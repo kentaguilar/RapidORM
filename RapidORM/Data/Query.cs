@@ -41,7 +41,7 @@ namespace RapidORM.Data
         {
             PropertyInfo[] fields = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-            string sqlQuery = "insert into " + GetTableName() + " (";
+            string query = "insert into " + GetTableName() + " (";
             string separator = "";
             foreach (PropertyInfo field in fields)
             {
@@ -50,11 +50,11 @@ namespace RapidORM.Data
                     continue; 
                 }
 
-                sqlQuery += separator + GetColumnName(field);
+                query += separator + GetColumnName(field);
                 separator = ",";
             }
 
-            sqlQuery += ") values (";
+            query += ") values (";
             separator = "";
             foreach (PropertyInfo field in fields)
             {
@@ -64,13 +64,15 @@ namespace RapidORM.Data
                 }
 
                 string strValue = field.GetValue(o, null).ToString();
-                sqlQuery += separator + FormatRawSqlQuery(strValue, field, specialCharacter);
+                query += separator + FormatRawSqlQuery(strValue, field, specialCharacter);
                 separator = ",";
             }
 
-            sqlQuery += ");";            
+            query += ");";
 
-            return sqlQuery;
+            Console.WriteLine(query);
+
+            return query;
         }
 
         protected ImageParameterQueryContainer CreateInsertQueryWithImage(T o)
@@ -211,6 +213,10 @@ namespace RapidORM.Data
                 if (IsStringType(field))
                 {
                     query = (specialCharacter == SpecialCharacter.Yes ? "N" : string.Empty) + ("'" + value.Replace("'", "\"") + "'");                    
+                }
+                else if (IsTimeSpanType(field))
+                {
+                    query = ("'" + value.Replace("'", "\"") + "'");
                 }
                 else if (IsDecimalType(field))
                 {

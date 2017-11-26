@@ -161,7 +161,7 @@ namespace RapidORM.Data.SQLite
                         property.PropertyType.ToString().Contains(DbType.Int32.ToString()))
                     {
                         property.SetValue(instance, Convert.ToInt32(reader[GetColumnName(property)]));
-                    }
+                    }                    
                     else
                     {
                         property.SetValue(instance, reader[GetColumnName(property)]);

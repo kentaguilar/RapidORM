@@ -162,8 +162,15 @@ namespace RapidORM.Data.MySQL
                 instance = Activator.CreateInstance(typeof(T));
 
                 foreach (var property in properties)
-                {                    
-                    property.SetValue(instance, reader[GetColumnName(property)]);
+                {
+                    if (property.PropertyType.ToString().Contains(DbType.String.ToString()))
+                    {
+                        property.SetValue(instance, Convert.ToString(reader[GetColumnName(property)]));
+                    }
+                    else
+                    {
+                        property.SetValue(instance, reader[GetColumnName(property)]);
+                    }
                 }                
 
                 values.Add((T)instance);                
