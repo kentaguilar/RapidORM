@@ -9,7 +9,7 @@ namespace RapidORM.Tests.Tests.Helpers
     public class NetworkHelperTest
     {
         [TestMethod]
-        public void DownloadFileFromFtpTest()
+        public void Helper_DownloadFileFromFtpTest()
         {
             var result = NetworkHelper.DownloadFileFromFtp("ftp://{domain}:{port}/public/images/profile/sample.jpg",
                             @"{local_pc_location}/sample.jpg", "{ftp_username}", "ftp_password");

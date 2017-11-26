@@ -23,7 +23,7 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void QueryBuilderSqlExecuteNonQueryTest()
+        public void QueryBuilder_SqlServer_ExecuteNonQueryTest()
         {
             string sql = "insert into systemuser(name,email,password,designatedposition) values(@name,@email,@password,@designation)";
             queryBuilder.ExecuteNonQuery(sql, new[]{
@@ -37,16 +37,16 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void QueryBuilderSqlExecuteScalarTest()
+        public void QueryBuilder_SqlServer_ExecuteScalarTest()
         {
-            string sql = "select * from systemuser order by id desc";
+            string sql = "select top 1 * from systemuser order by 1 desc";
             var systemUsers = queryBuilder.ExecuteScalar(sql);
             
-            Assert.AreEqual(5, systemUsers);
+            Assert.AreEqual(10, systemUsers);
         }
 
         [TestMethod]
-        public void QueryBuilderSqlExecuteReaderTest()
+        public void QueryBuilder_SqlServer_ExecuteReaderTest()
         {
             string sql = "select * from systemuser where id=@id";
             var reader = queryBuilder.ExecuteReader(sql, new[]{
@@ -64,11 +64,11 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void QueryBuilderSqlGetDataUsingDataAdapterTest()
+        public void QueryBuilder_SqlServer_GetDataUsingDataAdapterTest()
         {
             string sql = "select * from systemuser where id=@id";
             DbParameter[] dbParameter = new DbParameter[]{
-                queryBuilder.MakeParameter("@id", 6, DbType.String)
+                queryBuilder.MakeParameter("@id", 5, DbType.String)
             };
 
             DataTable result = queryBuilder.GetDataUsingDataAdapter(sql, dbParameter, CommandType.Text);

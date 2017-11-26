@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.106.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RapidOrm.Core.1.1.0\lib\System.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -81,8 +82,21 @@
       <Name>RapidORM</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Content Include="bin\Debug\MySql.Data.dll" />
+    <Content Include="bin\Debug\RapidORM.dll" />
+    <Content Include="bin\Debug\RapidORM.pdb" />
+    <Content Include="bin\Debug\RapidORM.Tests.dll" />
+    <Content Include="bin\Debug\RapidORM.Tests.pdb" />
+    <Content Include="bin\Debug\System.Data.SQLite.dll" />
+    <Content Include="bin\Debug\x64\SQLite.Interop.dll" />
+    <Content Include="bin\Debug\x86\SQLite.Interop.dll" />
+    <Content Include="bin\Release\x64\SQLite.Interop.dll" />
+    <Content Include="bin\Release\x86\SQLite.Interop.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\logs\11262017.log" />
+    <None Include="bin\Debug\rapidorm.sqlite" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

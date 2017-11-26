@@ -14,19 +14,30 @@ namespace RapidORM.Tests.Core
         {
             switch (dbType)
             {
-                case DatabaseType.MySql: ConnectToDb(); break;
+                case DatabaseType.MySql: ConnectToMySql(); break;
                 case DatabaseType.SQLite: ConnectToSQLite(); break;
-                default: ConnectToDb(); break;
+                default: ConnectToSqlServer(); break;
             }
         }
 
-        private static void ConnectToDb()
+        private static void ConnectToMySql()
         {
             DBConnection.ConnectionString = new DBConnectionSetting()
             {
                 Server = "localhost",
                 Database = "rapidorm",
                 Username = "root",
+                Password = ""
+            };
+        }
+
+        private static void ConnectToSqlServer()
+        {
+            DBConnection.ConnectionString = new DBConnectionSetting()
+            {
+                Server = "localhost",
+                Database = "rapidorm",
+                Username = "sa",
                 Password = ""
             };
         }

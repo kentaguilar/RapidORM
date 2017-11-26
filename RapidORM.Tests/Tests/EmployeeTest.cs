@@ -22,7 +22,7 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void SaveEmployeeTest()
+        public void SQLite_SaveEmployeeTest()
         {
             employee.Save(new Employee
             {
@@ -34,7 +34,7 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void InsertEmployeeWithoutPrimaryKeyTest()
+        public void SQLite_InsertEmployeeWithoutPrimaryKeyTest()
         {
             employee.InsertWithoutPrimaryKey(new Employee
             {
@@ -47,7 +47,7 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void InsertEmployeeAndReturnAnIdTest()
+        public void SQLite_InsertEmployeeAndReturnAnIdTest()
         {
             int savedId = employee.InsertEmployeeAndReturnAnId(new Employee
             {
@@ -59,15 +59,15 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void DeletEmployeeByFieldNameTest()
+        public void SQLite_DeleteEmployeeByFieldNameTest()
         {
-            employee.DeleteEmployeeByPropertyName("Hilda Owens");
+            employee.DeleteEmployeeByPropertyName("Anna Diaz");
 
             Assert.Inconclusive("Employee deleted");
         }
 
         [TestMethod]
-        public void DeleteEmployeeByObjectTest()
+        public void SQLite_DeleteEmployeeByObjectTest()
         {
             employee.DeleteEmployeeByObject(new Employee
             {
@@ -78,7 +78,7 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void GetAllEmployeesTest()
+        public void SQLite_GetAllEmployeesTest()
         {
             IEnumerable<Employee> employees = employee.GetAllEmployees();
 
@@ -86,25 +86,25 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void GetEmployeesByPositionTest()
+        public void SQLite_GetEmployeesByPositionTest()
         {
-            IEnumerable<Employee> employees = employee.GetEmployeesByPosition("Supervisor");
+            IEnumerable<Employee> employees = employee.GetEmployeesByPosition("Network Administrator");
 
             Assert.AreEqual(5, employees.Count());
         }
 
         [TestMethod]
-        public void GetEmployeesByStringCriteriaTest()
+        public void SQLite_GetEmployeesByStringCriteriaTest()
         {
-            IEnumerable<Employee> employees = employee.GetEmployeesByStringCriteria(4);
+            IEnumerable<Employee> employees = employee.GetEmployeesByStringCriteria(5);
 
             Assert.AreEqual(5, employees.Count());
         }
 
         [TestMethod]
-        public void GetEmployeesByMultipleCriteriaTest()
+        public void SQLite_GetEmployeesByMultipleCriteriaTest()
         {
-            IEnumerable<Employee> employees = employee.GetEmployeesByMultipleCriteria("Pogi Points", "HR Assistant");
+            IEnumerable<Employee> employees = employee.GetEmployeesByMultipleCriteria("Anna Diaz", "Line Supervisor");
 
             Assert.AreEqual(5, employees.Count());
         }

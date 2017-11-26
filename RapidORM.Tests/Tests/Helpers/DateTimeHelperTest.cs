@@ -9,7 +9,7 @@ namespace RapidORM.Tests.Tests.Helpers
     public class DateTimeHelperTest
     {
         [TestMethod]
-        public void GetDateTimeForDBTest()
+        public void Helper_GetDateTimeForDBTest()
         {
             Assert.AreEqual("test", DateHelper.GetDateTimeForDB());
         }

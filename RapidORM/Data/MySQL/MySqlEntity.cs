@@ -138,14 +138,14 @@ namespace RapidORM.Data.MySQL
         #region Retrieval
         public IEnumerable<T> GetAllObjects()
         {
-            IEnumerable<T> objects = null;
+            IEnumerable<T> objectList = null;
             string table = tableName;
 
-            string strSQL = "select * from " + table;
+            string query = "select * from " + table;
 
-            objects = GetValues(strSQL);
+            objectList = GetValues(query);
 
-            return objects;
+            return objectList;
         }
 
         public IEnumerable<T> GetObjectsByCriteria(string field, string criteria)

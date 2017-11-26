@@ -155,8 +155,17 @@ namespace RapidORM.Data.SQLite
             {
                 instance = Activator.CreateInstance(typeof(T));
                 foreach (var property in properties)
-                {
-                    property.SetValue(instance, reader[GetColumnName(property)]);
+                {                    
+                    if (property.PropertyType.ToString().Contains(DbType.Int64.ToString()) ||
+                        property.PropertyType.ToString().Contains(DbType.Int16.ToString()) || 
+                        property.PropertyType.ToString().Contains(DbType.Int32.ToString()))
+                    {
+                        property.SetValue(instance, Convert.ToInt32(reader[GetColumnName(property)]));
+                    }
+                    else
+                    {
+                        property.SetValue(instance, reader[GetColumnName(property)]);
+                    }
                 }
 
                 values.Add((T)instance);

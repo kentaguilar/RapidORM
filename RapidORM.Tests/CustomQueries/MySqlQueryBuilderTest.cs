@@ -24,7 +24,7 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void QueryBuilderMySqlExecuteNonQueryTest()
+        public void QueryBuilder_MySql_ExecuteNonQueryTest()
         {
             string sql = "insert into department(name,date_created) VALUES(@name,@datecreated)";
             queryBuilder.ExecuteNonQuery(sql, new[]{
@@ -36,20 +36,20 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void QueryBuilderMySqlExecuteScalarTest()
+        public void QueryBuilder_MySql_ExecuteScalarTest()
         {
-            string sql = "select * from department";
+            string sql = "select * from department order by 1 desc limit 0,1";
             var departments = queryBuilder.ExecuteScalar(sql);
 
             Assert.AreEqual(5, departments);
         }
 
         [TestMethod]
-        public void QueryBuilderMySqlExecuteReaderTest()
+        public void QueryBuilder_MySql_ExecuteReaderTest()
         {
             string sql = "select * from department where id=@id";
             var reader = queryBuilder.ExecuteReader(sql, new[]{
-                new MySqlParameter{ ParameterName="@id", Value = "7" }
+                new MySqlParameter{ ParameterName="@id", Value = "25" }
             }, CommandType.Text);
 
             int rows = 0;
@@ -63,11 +63,11 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void QueryBuilderMySqlGetDataUsingDataAdapterTest()
+        public void QueryBuilder_MySql_GetDataUsingDataAdapterTest()
         {
             string sql = "select * from department where id=@id";
             DbParameter[] dbParameter = new DbParameter[]{
-                queryBuilder.MakeParameter("@id", 7, DbType.String)
+                queryBuilder.MakeParameter("@id", 29, DbType.String)
             };
 
             DataTable result = queryBuilder.GetDataUsingDataAdapter(sql, dbParameter, CommandType.Text);

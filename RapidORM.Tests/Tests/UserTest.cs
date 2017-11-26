@@ -23,7 +23,7 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void SaveUserTest()
+        public void SQLServer_SaveUserTest()
         {
             systemUser.Save(new SystemUser
             {
@@ -37,7 +37,7 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void InsertUserAndReturnAnIdTest()
+        public void SQLServer_InsertUserAndReturnAnIdTest()
         {
             int savedId = systemUser.InsertUserAndReturnAnId(new SystemUser
             {
@@ -51,7 +51,7 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void DeleteUserByPropertyNameTest()
+        public void SQLServer_DeleteUserByPropertyNameTest()
         {
             systemUser.DeleteUserByPropertyName("elizabeth@gmail.com");
 
@@ -59,18 +59,18 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void DeleteUserByObjectTest()
+        public void SQLServer_DeleteUserByObjectTest()
         {
             systemUser.DeleteUserByObject(new SystemUser
             {
-                Id = 2
+                Id = 1
             });
 
             Assert.Inconclusive("User deleted");
         }
 
         [TestMethod]
-        public void GetAllSystemUsersTest()
+        public void SQLServer_GetAllSystemUsersTest()
         {
             IEnumerable<SystemUser> systemUsers = systemUser.GetAllSystemUsers();
 
@@ -78,7 +78,7 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void GetUserByDesignatedPositionTest()
+        public void SQLServer_GetUserByDesignatedPositionTest()
         {
             IEnumerable<SystemUser> systemUsers = systemUser.GetUserByDesignatedPosition("Queen");
 
@@ -86,15 +86,15 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void GetUsersByStringCriteriaTest()
+        public void SQLServer_GetUsersByStringCriteriaTest()
         {
-            IEnumerable<SystemUser> systemUsers = systemUser.GetUsersByStringCriteria(5);
+            IEnumerable<SystemUser> systemUsers = systemUser.GetUsersByStringCriteria(2);
 
             Assert.AreEqual(5, systemUsers.Count());
         }
 
         [TestMethod]
-        public void GetUsersByMultipleCriteriaTest()
+        public void SQLServer_GetUsersByMultipleCriteriaTest()
         {
             IEnumerable<SystemUser> systemUsers = systemUser.GetUsersByMultipleCriteria("Cersei Lannister", "Queen");
 

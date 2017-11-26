@@ -34,8 +34,6 @@ namespace RapidORM.Data
 
             query += ");";
 
-            LogHelper.Log(query);
-
             return query;
         }
 
@@ -70,7 +68,7 @@ namespace RapidORM.Data
                 separator = ",";
             }
 
-            sqlQuery += ");";
+            sqlQuery += ");";            
 
             return sqlQuery;
         }
@@ -220,7 +218,7 @@ namespace RapidORM.Data
                 }
                 else if (IsDateTimeType(field))
                 {
-                    query = string.Format("'{0}'", Convert.ToDateTime(value).ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                    query = string.Format("'{0}'", Convert.ToDateTime(value).ToString("yyyy-MM-dd HH:mm:ss"));
                 }
                 else
                 {

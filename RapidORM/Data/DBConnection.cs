@@ -67,7 +67,7 @@ namespace RapidORM.Data
         private static string GetMySqlConnectionString()
         {
 
-            string connection = string.Format(@"Server={0};Database={1};Uid={2};Pwd={3};{4}", ConnectionString.Server, ConnectionString.Database,
+            string connection = string.Format(@"Server={0};Database={1};Uid={2};Pwd={3};{4};convert zero datetime=True", ConnectionString.Server, ConnectionString.Database,
                 ConnectionString.Username, ConnectionString.Password, IsUTF8 ? "charset=utf8;" : "");
 
             return connection;

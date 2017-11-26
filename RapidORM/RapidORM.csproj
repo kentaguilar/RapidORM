@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Common\ColumnName.cs" />
+    <Compile Include="Data\Common\Extension.cs" />
     <Compile Include="Data\Common\IsImage.cs" />
     <Compile Include="Data\Common\IsPrimaryKey.cs" />
     <Compile Include="Data\Common\TableName.cs" />

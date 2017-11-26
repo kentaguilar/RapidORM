@@ -23,50 +23,50 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void SaveDepartmentTest()
+        public void MySql_SaveDepartmentTest()
         {            
             department.Save(new Department 
             { 
-                Name = "Finance",
-                DateCreated = DateTime.Now
+                Name = "Accounting",
+                DateCreated = DateTime.Now.Date
             });
 
             Assert.Inconclusive("New Department Saved");
         }        
 
         [TestMethod]
-        public void InsertDepartmentAndReturnAnIdTest()
+        public void MySql_InsertDepartmentAndReturnAnIdTest()
         {
             int savedId = department.InsertDepartmentAndReturnAnId(new Department 
             { 
                 Name = "Production",
-                DateCreated = DateTime.Now
+                DateCreated = DateTime.Now.Date
             });
 
             Assert.AreEqual(1, savedId);
         }
 
         [TestMethod]
-        public void DeleteDepartmentByFieldNameTest()
+        public void MySql_DeleteDepartmentByFieldNameTest()
         {
-            department.DeleteDepartmentByPropertyName("Inventory");
+            department.DeleteDepartmentByPropertyName("Production");
 
             Assert.Inconclusive("Department deleted");
         }
 
         [TestMethod]
-        public void DeleteDepartmentByObjectTest()
+        public void MySql_DeleteDepartmentByObjectTest()
         {
             department.DeleteDepartmentByObject(new Department
             {
-                Id = 3
+                Id = 27
             });
 
             Assert.Inconclusive("Department deleted");
         }
 
         [TestMethod]
-        public void GetAllDepartmentsTest()
+        public void MySql_GetAllDepartmentsTest()
         {
             IEnumerable<Department> departments = department.GetAllDepartments();
 
@@ -74,23 +74,23 @@ namespace RapidORM.Tests.Tests
         }
 
         [TestMethod]
-        public void GetDepartmentByDateTest()
+        public void MySql_GetDepartmentByDateTest()
         {
-            IEnumerable<Department> departments = department.GetDepartmentsByDate(DateTime.Now);
+            IEnumerable<Department> departments = department.GetDepartmentsByDate(DateTime.Now.Date);
+
+            Assert.IsNull(departments);            
+        }
+
+        [TestMethod]
+        public void MySql_GetDepartmentsByStringCriteriaTest()
+        {
+            IEnumerable<Department> departments = department.GetDepartmentsByStringCriteria(19);
 
             Assert.AreEqual(5, departments.Count());
         }
 
         [TestMethod]
-        public void GetDepartmentsByStringCriteriaTest()
-        {
-            IEnumerable<Department> departments = department.GetDepartmentsByStringCriteria(4);
-
-            Assert.AreEqual(5, departments.Count());
-        }
-
-        [TestMethod]
-        public void GetDepartmentsByMultipleCriteriaTest()
+        public void MySql_GetDepartmentsByMultipleCriteriaTest()
         {
             IEnumerable<Department> departments = department.GetDepartmentsByMultipleCriteria("Marketing", DateTime.Now);
 

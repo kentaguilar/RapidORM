@@ -7,7 +7,6 @@ using RapidORM.Data;
 using RapidORM.Helpers;
 using RapidORM.Data.Common;
 using RapidORM.Data.MySQL;
-using System.Reflection;
 
 namespace RapidORM.Tests.Models.MySQL
 {
@@ -24,7 +23,7 @@ namespace RapidORM.Tests.Models.MySQL
         [ColumnName("date_created")]
         public DateTime DateCreated { get; set; }
 
-        private MySqlEntity<Department> entity = new MySqlEntity<Department>();  
+        private IDBEntity<Department> entity = new MySqlEntity<Department>();  
 
         #region Class Methods
         public void Save(Department department)
@@ -64,7 +63,7 @@ namespace RapidORM.Tests.Models.MySQL
             var departments = entity.GetObjectsByCriteria(new SearchCriteria
             {
                 Column = PropertyHelper.GetPropertyName(() => this.DateCreated),
-                Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                Value = givenDate.ToString()
             });
 
             return (departments.Count() > 0) ? departments : null;

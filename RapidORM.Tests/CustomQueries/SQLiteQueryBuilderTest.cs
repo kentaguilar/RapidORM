@@ -22,15 +22,15 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void CreateSQLiteDatabase()
+        public void QueryBuilder_SQLite_CreateDatabase()
         {
-            DBConnection.CreateDatabase(DatabaseType.SQLite, "sampledb");
+            DBConnection.CreateDatabase(DatabaseType.SQLite, "rapidorm");
 
             Assert.Inconclusive("Database Created");
         }
 
         [TestMethod]
-        public void CreateSQLiteTableTest()
+        public void QueryBuilder_SQLite_CreateTableTest()
         {
             string sql = "create table if not exists employee(id integer primary key autoincrement,name varchar(50),position varchar(70))";
             queryBuilder.ExecuteNonQuery(sql);
@@ -39,7 +39,7 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void QueryBuilderSQLiteExecuteNonQueryTest()
+        public void QueryBuilder_SQLite_ExecuteNonQueryTest()
         {
             string sql = "insert into employee(name, position) VALUES(@name, @position)";
             queryBuilder.ExecuteNonQuery(sql, new[]{
@@ -51,20 +51,20 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void QueryBuilderSQLiteExecuteScalarTest()
+        public void QueryBuilder_SQLite_ExecuteScalarTest()
         {
-            string sql = "select * from employee";
+            string sql = "select * from employee order by 1 desc limit 1";
             var employees = queryBuilder.ExecuteScalar(sql);
 
             Assert.AreEqual(5, employees);
         }
 
         [TestMethod]
-        public void QueryBuilderSQLiteExecuteReaderTest()
+        public void QueryBuilder_SQLite_ExecuteReaderTest()
         {
             string sql = "select * from employee where id=@id";
             var reader = queryBuilder.ExecuteReader(sql, new[]{
-                new SQLiteParameter{ ParameterName="@id", Value = "7" }
+                new SQLiteParameter{ ParameterName="@id", Value = "5" }
             }, CommandType.Text);
 
             int rows = 0;
@@ -78,11 +78,11 @@ namespace RapidORM.Tests.CustomQueries
         }
 
         [TestMethod]
-        public void QueryBuilderSQLiteGetDataUsingDataAdapterTest()
+        public void QueryBuilder_SQLite_GetDataUsingDataAdapterTest()
         {
             string sql = "select * from employee where id=@id";
             DbParameter[] dbParameter = new DbParameter[]{
-                queryBuilder.MakeParameter("@id", 7, DbType.String)
+                queryBuilder.MakeParameter("@id", 5, DbType.String)
             };
 
             DataTable result = queryBuilder.GetDataUsingDataAdapter(sql, dbParameter, CommandType.Text);

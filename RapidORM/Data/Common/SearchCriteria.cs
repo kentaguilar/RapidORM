@@ -13,10 +13,4 @@ namespace RapidORM.Data.Common
         public string Column { get; set; }
         public string Value { get; set; }
     }
-
-    public class NewSearchCriteria
-    {
-        public object Column { get; set; }
-        public string Value { get; set; }
-    }
 }

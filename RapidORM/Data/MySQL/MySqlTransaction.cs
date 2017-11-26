@@ -8,6 +8,7 @@ using System.Data;
 using System.Reflection;
 using RapidORM.Data;
 using RapidORM.Data.Common;
+using RapidORM.Helpers;
 
 namespace RapidORM.Data.MySQL
 {
@@ -154,17 +155,18 @@ namespace RapidORM.Data.MySQL
             object instance = null;
 
             PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var reader = GetMySqlDataReader(query);            
+            var reader = GetMySqlDataReader(query);
 
             while (reader.Read())
             {
                 instance = Activator.CreateInstance(typeof(T));
-                foreach (var property in properties)
-                {
-                    property.SetValue(instance, reader[GetColumnName(property)]);
-                }
 
-                values.Add((T)instance);
+                foreach (var property in properties)
+                {                    
+                    property.SetValue(instance, reader[GetColumnName(property)]);
+                }                
+
+                values.Add((T)instance);                
             }           
             
             reader.Close();
