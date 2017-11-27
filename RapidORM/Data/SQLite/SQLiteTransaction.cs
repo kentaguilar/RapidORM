@@ -19,8 +19,8 @@ namespace RapidORM.Data.SQLite
             {
                 try
                 {
-                    var command = new SQLiteCommand(sql, connection);
                     connection.Open();
+                    var command = new SQLiteCommand(sql, connection);                    
                     command.ExecuteNonQuery();
                 }
                 finally
@@ -36,8 +36,8 @@ namespace RapidORM.Data.SQLite
             {
                 try
                 {
-                    var command = new SQLiteCommand(imageParameterQueryContainer.SqlQuery, connection);
                     connection.Open();
+                    var command = new SQLiteCommand(imageParameterQueryContainer.SqlQuery, connection);                    
 
                     foreach (var imageParameter in imageParameterQueryContainer.ImageParameterList)
                     {
@@ -59,8 +59,8 @@ namespace RapidORM.Data.SQLite
             {
                 try
                 {
-                    var command = new SQLiteCommand(string.Format("{0};select last_insert_rowid();", sql), connection);
                     connection.Open();
+                    var command = new SQLiteCommand(string.Format("{0};select last_insert_rowid();", sql), connection);                    
                     object result = command.ExecuteScalar();
 
                     return result;
@@ -105,8 +105,8 @@ namespace RapidORM.Data.SQLite
                 try
                 {
                     string returnVal = null;
-                    SQLiteCommand command = new SQLiteCommand(sql, connection);
                     connection.Open();
+                    SQLiteCommand command = new SQLiteCommand(sql, connection);                    
                     SQLiteDataReader reader = command.ExecuteReader();
 
                     if (reader.Read())

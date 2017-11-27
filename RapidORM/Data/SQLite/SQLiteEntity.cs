@@ -50,7 +50,7 @@ namespace RapidORM.Data.SQLite
         {
             try
             {
-                ExecuteNonQuery(CreateUpdateQuery(o));
+                ExecuteNonQuery(CreateUpdateQuery(o, SpecialCharacter.No));
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace RapidORM.Data.SQLite
         {
             try
             {
-                ExecuteNonQuery(CreateUpdateQueryWithImage(o));
+                ExecuteNonQuery(CreateUpdateQueryWithImage(o, SpecialCharacter.No));
             }
             catch (Exception ex)
             {
@@ -112,7 +112,7 @@ namespace RapidORM.Data.SQLite
         {
             try
             {
-                ExecuteNonQuery(CreateInsertQueryWithImage(o));
+                ExecuteNonQuery(CreateInsertQueryWithImage(o, SpecialCharacter.No));
             }
             catch (Exception ex)
             {

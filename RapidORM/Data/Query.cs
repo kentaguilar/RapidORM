@@ -75,7 +75,7 @@ namespace RapidORM.Data
             return query;
         }
 
-        protected ImageParameterQueryContainer CreateInsertQueryWithImage(T o)
+        protected ImageParameterQueryContainer CreateInsertQueryWithImage(T o, SpecialCharacter specialCharacter = SpecialCharacter.Yes)
         {
             var imageParameterList = new List<ImageParameter>();
             PropertyInfo[] fields = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -117,7 +117,7 @@ namespace RapidORM.Data
                     fieldValue = field.GetValue(o, null).ToString();
                 }
 
-                sqlQuery += separator + FormatRawSqlQuery(fieldValue, field);
+                sqlQuery += separator + FormatRawSqlQuery(fieldValue, field, specialCharacter);
                 separator = ",";
             }
 
@@ -129,8 +129,8 @@ namespace RapidORM.Data
                 SqlQuery = sqlQuery
             };
         }
-        
-        protected string CreateUpdateQuery(T o)
+
+        protected string CreateUpdateQuery(T o, SpecialCharacter specialCharacter = SpecialCharacter.Yes)
         {
             string uniqueField = GetPrimaryKey().Name;
 
@@ -144,7 +144,7 @@ namespace RapidORM.Data
 
                 string strValue = field.GetValue(o, null).ToString();
                 sqlQuery += separator + GetColumnName(field);
-                sqlQuery += " = " + FormatRawSqlQuery(strValue, field);
+                sqlQuery += " = " + FormatRawSqlQuery(strValue, field, specialCharacter);
                 separator = ",";
             }
 
@@ -156,7 +156,7 @@ namespace RapidORM.Data
             return sqlQuery;
         }
 
-        protected ImageParameterQueryContainer CreateUpdateQueryWithImage(T o)
+        protected ImageParameterQueryContainer CreateUpdateQueryWithImage(T o, SpecialCharacter specialCharacter = SpecialCharacter.Yes)
         {
             var imageParameterList = new List<ImageParameter>();
             string uniqueField = GetPrimaryKey().Name;
@@ -185,7 +185,7 @@ namespace RapidORM.Data
                 }
 
                 sqlQuery += separator + GetColumnName(field);
-                sqlQuery += " = " + FormatRawSqlQuery(fieldValue, field);
+                sqlQuery += " = " + FormatRawSqlQuery(fieldValue, field, specialCharacter);
                 separator = ",";
             }
 

@@ -23,7 +23,7 @@ namespace RapidORM.Tests.Models.SQLite
         [ColumnName("position")]
         public string Position { get; set; }
 
-        private IDBEntity<Employee> entity = new SQLiteEntity<Employee>();
+        private SQLiteEntity<Employee> entity = new SQLiteEntity<Employee>();
 
         #region Class Methods
         public void Save(Employee employee)
