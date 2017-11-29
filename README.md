@@ -1,13 +1,13 @@
 <img src="http://www.deepmirage.com/git/rapidormlogo.png" alt="RapidORM" width="300px"/>
 
-Expressive, dynamic and functional Object Relational Mapping technology that allows you to easily perform CRUD operations. RapidORM lets you focus more on the behavior of the app instead of spending more time with the DB communication.
+Expressive, dynamic, functional, and easy-to-use Object Relational Mapping technology that allows you to do CRUD operations. RapidORM lets you focus more on the behavior of the app instead of spending more time with the DB communication.
 <br/><br/>
 More so, RapidORM supports multiple databases in the industry(and growing). <br/>
 Depending on your preference, RapidORM also allows you to execute good ol' SQL queries via the QueryBuilder.
 
 ## Supported Database
 
-SQL Server, MYSQL
+SQL Server, MYSQL, SQLite
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ namespace RapidORM.Tests.Core
 {
     public class Database
     {
-        public static void UseSqlDb()
+        public static void UseDB()
         {
             DBContext.ConnectionString = new DBConnection()
             {
@@ -57,26 +57,7 @@ public string Column1 { get; set; }
 - Declare the DB Entity
 
 ```c#
-private SqlEntity<MyClass> dbEntity = null;
-```
-
-- Instantiate user entity on default constructor
-
-```c#
-public MyClass()
-{
-    dbEntity = new SqlEntity<MyClass>();
-}
-```
-
-- Create constructor required for data retrieval
-
-```c#
-public MyClass(Dictionary<string, object> args)
-{
-    Id = Convert.ToInt32(args["ID"].ToString());
-    Column1 = args["Column1"].ToString();         
-}
+private SqlEntity<MyClass> dbEntity = new SqlEntity<MyClass>();;
 ```
 
 - Here's the sample model.
@@ -88,11 +69,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RapidORM.Data;
-using RapidORM.Helpers;
-using RapidORM.Attributes;
-using RapidORM.Interfaces;
-using RapidORM.Client.MySQL;
-using RapidORM.Common;
+using RapidORM.Data.Common
+using RapidORM.Data.MySQL;
 
 namespace MyNamespace
 {
@@ -106,19 +84,7 @@ namespace MyNamespace
         [ColumnName("Column1")]
         public string Column1 { get; set; }
 
-        private SqlEntity<MyClass> dbEntity = null;
-
-        public MyClass()
-        {
-            dbEntity = new SqlEntity<MyClass>();
-        }
-
-        //Required for Data Retrieval
-        public MyClass(Dictionary<string, object> args)
-        {
-            Id = Convert.ToInt32(args["ID"].ToString());
-            Column1 = args["Column1"].ToString();         
-        }
+        private SqlEntity<MyClass> dbEntity = new SqlEntity<MyClass>();
 
         public void GetAllUserProfiles()
         {
@@ -133,5 +99,10 @@ namespace MyNamespace
     }
 }
 ```
+
+- You see, in just a few lines of code, you can now perform DB operations. Basic understanding of OOP is needed and you're set to go.
+<br/>
+- By the way, RapidORM also comes with a QueryBuilder. So, if you are into queries or your app involves complex joins or logic that can only be achieved using a query, you can solve it using RapidORM as well.
+<br/><br/>
 
 - That should be it.
