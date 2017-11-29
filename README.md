@@ -77,7 +77,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RapidORM.Data;
 using RapidORM.Data.Common
-using RapidORM.Data.MySQL;
+using RapidORM.Data.SQL;
 
 namespace MyNamespace
 {
