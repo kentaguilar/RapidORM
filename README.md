@@ -5,6 +5,12 @@ Expressive, dynamic, functional, and easy-to-use Object Relational Mapping techn
 More so, RapidORM supports multiple databases in the industry(and growing). <br/>
 Depending on your preference, RapidORM also allows you to execute good ol' SQL queries via the QueryBuilder.
 
+## NuGet Package
+
+[Rapid ORM Library](https://www.nuget.org/packages/RapidORM.dll/) - Actual Rapid ORM library published on NuGet<br/>
+[Rapid ORM Core](https://www.nuget.org/packages/RapidOrm.Core/) - Needed external libraries for RapidORM. Package includes MySql.Data and SQLLite dependencies
+
+
 ## Supported Database
 
 SQL Server, MYSQL, SQLite
@@ -100,9 +106,7 @@ namespace MyNamespace
 }
 ```
 
-- You see, in just a few lines of code, you can now perform DB operations. Basic understanding of OOP is needed and you're set to go.
-<br/>
-- By the way, RapidORM also comes with a QueryBuilder. So, if you are into queries or your app involves complex joins or logic that can only be achieved using a query, you can solve it using RapidORM as well.
+- You see, in just a few lines of code, you can now perform DB operations. Basic understanding of OOP is needed and you're set to go. <br/><br/>By the way, RapidORM also comes with a QueryBuilder. So, if you are into queries or your app involves complex joins or logic that can only be achieved using a query, you can solve it using RapidORM as well.
 <br/><br/>
 
 - That should be it.
