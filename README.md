@@ -1,9 +1,8 @@
 <img src="http://www.deepmirage.com/git/rapidormlogo.png" alt="RapidORM" width="300px"/>
 
-Expressive, dynamic, functional, and easy-to-use Object Relational Mapping technology that allows you to do CRUD operations. RapidORM lets you focus more on the behavior of the app instead of spending more time with the DB communication.
+Expressive, dynamic, functional, and easy-to-use Object Relational Mapping technology that allows you to do your CRUD operations on-the-fly. RapidORM lets you focus more on the behavior of your app instead of spending more time composing queries for database operations.
 <br/><br/>
 More so, RapidORM supports multiple databases in the industry(and growing). <br/>
-Depending on your preference, RapidORM also allows you to execute good ol' SQL queries via the QueryBuilder.
 
 ## NuGet Package
 
@@ -16,6 +15,8 @@ Depending on your preference, RapidORM also allows you to execute good ol' SQL q
 SQL Server, MYSQL, SQLite
 
 ## Getting Started
+This right here is a sample for SQL Server.
+- First off, you need to import the RapidORM packages from NuGet. As easy as finding "RapidORM" after clicking Manage NuGet from your project. Install those two packages and you're all set to use RapidORM.
 
 - Create a database wrapper class inside your project. Create a static method. The content shoud be the instantiation of the DBConnection class. Reference RapidORM.Data. Like so,
 
@@ -33,7 +34,7 @@ namespace RapidORM.Tests.Core
     {
         public static void UseDB()
         {
-            DBContext.ConnectionString = new DBConnection()
+            DBConnection.ConnectionString = new DBConnectionSetting()
             {
                 Server = "",
                 Database = "",
@@ -45,11 +46,11 @@ namespace RapidORM.Tests.Core
 }
 ```
 
-- Now, create your model. Your model should be the counterpart of your DB table. Hence, if I have a "department" table, you could have a "Department" class as well. Please also note that you can interactively create your model using the RapiORM Entity Creator.
+- Now, create your model. Your model should be the counterpart of your database table. Hence, if I have a "department" table, you could have a "Department" class as well. Please also note that you can interactively create your model using the RapiORM Entity Creator.
 
-- Reference the basic libraries -> RapidORM.Data, RapidORM.Helpers, RapidORM.Interfaces. You can choose what library to remove and/or add depending on your requirements.
+- Reference the basic libraries -> <b>RapidORM.Data, RapidORM.Data.Common and RapidORM.Data.SQL(SQL Server)</b>(This could be <b>RapidORM.Data.MySql</b> for MySQL, and <b>RapidORM.Data.SQLite</b> for SQLite). You can choose what library to remove and/or add depending on your requirements.
 
-- Map your properties
+- Now, map your properties
 
 ```c#
 [IsPrimaryKey(true)]
@@ -90,8 +91,9 @@ namespace MyNamespace
         [ColumnName("Column1")]
         public string Column1 { get; set; }
 
-        private SqlEntity<MyClass> dbEntity = new SqlEntity<MyClass>();
+        private IDBEntity<MyClass> dbEntity = new SqlEntity<MyClass>();
 
+        #region Class Methods
         public void GetAllUserProfiles()
         {
             var myList = dbEntity.GetAllObjects();
@@ -100,13 +102,14 @@ namespace MyNamespace
                 Console.WriteLine(item.Column1);
             }
         }
-
+        
         //Your other methods here(Please see the test project for reference)
+        #endregion 
     }
 }
 ```
 
-- You see, in just a few lines of code, you can now perform DB operations. Basic understanding of OOP is needed and you're set to go. <br/><br/>By the way, RapidORM also comes with a QueryBuilder. So, if you are into queries or your app involves complex joins or logic that can only be achieved using a query, you can solve it using RapidORM as well.
+- You see, in just a few lines of code, you can now perform DB operations. Basic understanding of OOP is needed and you're set to go. <br/><br/>By the way, RapidORM also comes with a QueryBuilder. So, if you are into queries or your app involves complex joins or logic that can only be achieved using a query, you can solve it using RapidORM as well. A separate comprehensive tutorial will be published soon to highlight RapiORM's capability on different platforms.
 <br/><br/>
 
 - That should be it.
