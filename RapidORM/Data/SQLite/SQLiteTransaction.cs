@@ -77,9 +77,9 @@ namespace RapidORM.Data.SQLite
             string table = GetTableName();
             string uniqueField = GetPrimaryKey().Name;
 
-            PropertyInfo piUnique = typeof(T).GetProperty(uniqueField);
+            PropertyInfo property = typeof(T).GetProperty(uniqueField);
             string query = "select " + uniqueField + " from " + table + " where ";
-            query += uniqueField + "=" + FormatRawSqlQuery(piUnique.GetValue(o, null).ToString(), piUnique, SpecialCharacter.No);
+            query += uniqueField + "=" + FormatRawSqlQuery(property.GetValue(o, null).ToString(), property, SpecialCharacter.No);
 
             string strReadBack = GetSingleValue(query, uniqueField);
             if (string.IsNullOrEmpty(strReadBack))

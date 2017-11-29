@@ -80,7 +80,7 @@ namespace RapidORM.Data
             var imageParameterList = new List<ImageParameter>();
             PropertyInfo[] fields = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-            string sqlQuery = "insert into " + GetTableName() + " (";
+            string query = "insert into " + GetTableName() + " (";
             string separator = "";
             foreach (PropertyInfo field in fields)
             {
@@ -89,11 +89,11 @@ namespace RapidORM.Data
                     continue; 
                 }
 
-                sqlQuery += separator + GetColumnName(field);
+                query += separator + GetColumnName(field);
                 separator = ",";
             }
 
-            sqlQuery += ") values (";
+            query += ") values (";
             separator = "";
             foreach (PropertyInfo field in fields)
             {
@@ -117,16 +117,16 @@ namespace RapidORM.Data
                     fieldValue = field.GetValue(o, null).ToString();
                 }
 
-                sqlQuery += separator + FormatRawSqlQuery(fieldValue, field, specialCharacter);
+                query += separator + FormatRawSqlQuery(fieldValue, field, specialCharacter);
                 separator = ",";
             }
 
-            sqlQuery += ");";
+            query += ");";
 
             return new ImageParameterQueryContainer
             {
                 ImageParameterList = imageParameterList,
-                SqlQuery = sqlQuery
+                SqlQuery = query
             };
         }
 
@@ -135,7 +135,7 @@ namespace RapidORM.Data
             string uniqueField = GetPrimaryKey().Name;
 
             PropertyInfo[] fields = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            string sqlQuery = "update " + GetTableName() + " set ";
+            string query = "update " + GetTableName() + " set ";
             string separator = string.Empty;
 
             foreach (PropertyInfo field in fields)
@@ -143,17 +143,17 @@ namespace RapidORM.Data
                 if (IsPrimaryKeyWithIdentity(field)) continue; 
 
                 string strValue = field.GetValue(o, null).ToString();
-                sqlQuery += separator + GetColumnName(field);
-                sqlQuery += " = " + FormatRawSqlQuery(strValue, field, specialCharacter);
+                query += separator + GetColumnName(field);
+                query += " = " + FormatRawSqlQuery(strValue, field, specialCharacter);
                 separator = ",";
             }
 
             PropertyInfo piUnique = typeof(T).GetProperty(uniqueField);
             string strUnique = piUnique.GetValue(o, null).ToString();
             strUnique = strUnique.Replace("'", "\"");
-            sqlQuery += " where " + uniqueField + "= '" + strUnique + "'";
+            query += " where " + uniqueField + "= '" + strUnique + "'";
 
-            return sqlQuery;
+            return query;
         }
 
         protected ImageParameterQueryContainer CreateUpdateQueryWithImage(T o, SpecialCharacter specialCharacter = SpecialCharacter.Yes)
@@ -162,7 +162,7 @@ namespace RapidORM.Data
             string uniqueField = GetPrimaryKey().Name;
 
             PropertyInfo[] fields = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            string sqlQuery = "update " + GetTableName() + " set ";
+            string query = "update " + GetTableName() + " set ";
             string separator = string.Empty;
 
             foreach (PropertyInfo field in fields)
@@ -184,20 +184,20 @@ namespace RapidORM.Data
                     fieldValue = field.GetValue(o, null).ToString();
                 }
 
-                sqlQuery += separator + GetColumnName(field);
-                sqlQuery += " = " + FormatRawSqlQuery(fieldValue, field, specialCharacter);
+                query += separator + GetColumnName(field);
+                query += " = " + FormatRawSqlQuery(fieldValue, field, specialCharacter);
                 separator = ",";
             }
 
             PropertyInfo piUnique = typeof(T).GetProperty(uniqueField);
             string strUnique = piUnique.GetValue(o, null).ToString();
             strUnique = strUnique.Replace("'", "\"");
-            sqlQuery += " where " + uniqueField + "= '" + strUnique + "'";
+            query += " where " + uniqueField + "= '" + strUnique + "'";
 
             return new ImageParameterQueryContainer
             {
                 ImageParameterList = imageParameterList,
-                SqlQuery = sqlQuery
+                SqlQuery = query
             };
         }
 

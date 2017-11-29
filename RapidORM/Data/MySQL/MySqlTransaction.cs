@@ -83,9 +83,9 @@ namespace RapidORM.Data.MySQL
             string table = GetTableName();
             string uniqueField = GetPrimaryKey().Name;
 
-            PropertyInfo piUnique = typeof(T).GetProperty(uniqueField);
+            PropertyInfo property = typeof(T).GetProperty(uniqueField);
             string query = "select " + uniqueField + " from " + table + " where ";
-            query += uniqueField + "=" + FormatRawSqlQuery(piUnique.GetValue(o, null).ToString(), piUnique);
+            query += uniqueField + "=" + FormatRawSqlQuery(property.GetValue(o, null).ToString(), property);
 
             string strReadBack = GetSingleValue(query, uniqueField);
             if (string.IsNullOrEmpty(strReadBack))
