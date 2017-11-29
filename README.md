@@ -64,7 +64,7 @@ public string Column1 { get; set; }
 - Declare the DB Entity
 
 ```c#
-private SqlEntity<MyClass> dbEntity = new SqlEntity<MyClass>();;
+private IDBEntity<MyClass> dbEntity = new SqlEntity<MyClass>();
 ```
 
 - Here's the sample model.
